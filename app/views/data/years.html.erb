@@ -1,4 +1,56 @@
 <h1>Departure Year</h1>
+
+<div id="year-graph"> </div>
+
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'year-graph',
+         defaultSeriesType: 'area'
+      },
+      title: {
+         text: 'Convict Departure Year'
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'Convict Count'
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         backgroundColor: '#FFFFFF',
+         align: 'left',
+         verticalAlign: 'top',
+         x: 100,
+         y: 70,
+         floating: true,
+         shadow: true
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+               this.y +' convicts departing in '+ this.x;
+         }
+      },
+      plotOptions: {
+         area: {
+           pointStart: <%= @years.first[:departure_year] %>
+        }
+      },
+      series: [{
+         name: 'Year',
+         data: [<%= (@years.first[:departure_year]..@years.last[:departure_year]).collect { |year| @years_map[year] || 0 }.join(', ') %>]
+      }]
+   });
+   
+   
+});
+</script>
+
+
 <% unless @years.empty? %>
   <table>
     <thead>
