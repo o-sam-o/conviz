@@ -20,7 +20,7 @@
       new google.maps.Marker({
         position: new google.maps.LatLng(<%= county.latitude %>, <%= county.longitude %>),
             map: map,
-            title:"<%= county_map[:convicts] %> Convicts"
+            title:"<%= county.name %> <%= county_map[:convicts] %> Convicts"
       });
     <% end %>
 
