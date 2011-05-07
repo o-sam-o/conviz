@@ -1,0 +1,37 @@
+<%= form_tag(convicts_path, :method => "get") do %>
+  <%= label_tag "q", "Search" %> 
+  <input type="search" name="q" value="<%= params[:q] %>" />
+  <%= submit_tag "Search", :class => "action-button" %>
+<% end %>
+
+
+<% unless @convicts.empty? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Boat</th>
+        <th>Departure Date</th>
+        <th>Court</th>
+        <th>Term</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @convicts.each do |convict| %>
+        <tr>
+          <td><%= link_to(convict.name, convict) %></td>
+          <td><%= convict.description %></td>
+          <td><%= convict.boat %></td>
+          <td><%= convict.departure_date %></td>
+          <td><%= convict.court %></td>
+          <td><%= convict.term %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= will_paginate @convicts %>
+<% else %>
+  <p>No convicts</p>
+<% end %>
