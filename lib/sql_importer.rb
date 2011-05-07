@@ -1,8 +1,16 @@
 require 'sqlite3'
 require 'active_support/all'
+require './uk_county_names'
 
 `rm convicts.db` if File.exists?('convicts.db')
 db = SQLite3::Database.new "convicts.db"
+
+def county_finder(court)
+ UK_COUNTY_NAMES.each do |county|
+   return county if court =~ /#{county}/i
+ end
+ return nil
+end
 
 =begin
 Name of convict, including any known aliases
@@ -24,6 +32,7 @@ db.execute <<-SQL
       destination varchar(1024),
       court_and_term varchar(1024),
       court varchar(1024),
+      court_county varchar(1024),
       term varchar(1024),
       source varchar(1024)
     );
@@ -60,6 +69,7 @@ File.open("Convict_records.txt", "r") do |infile|
       destination: values[4],
       court_and_term: court_and_term,
       court: court,
+      court_county: county_finder(court),
       term: term,
       source: values[5],
     }

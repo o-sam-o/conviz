@@ -1,0 +1,36 @@
+<h1>Convict Court Locations</h1>
+
+<div id="map_canvas" style="width: 300px; height: 450px"></div> 
+
+<script>
+  
+  $(document).ready(function() {
+    var myLatlng = new google.maps.LatLng(54.55, -4.1);
+    var myOptions = {
+      zoom: 5,
+      center: myLatlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+  });
+
+</script>
+
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Convicts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @counties.each do |county_map| %>
+        <tr>
+          <td><%= link_to(county_map[:court_county], convicts_path(:court_county => county_map[:court_county])) %></td>
+          <td><%= county_map[:convicts] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
