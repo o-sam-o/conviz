@@ -10,37 +10,26 @@
   <h1>Convicts going to <%= params[:destination] %></h1>
 <% elsif params[:departure_year] %>
   <h1>Convicts departing <%= params[:departure_year] %></h1>
+<% elsif params[:court_county] %>
+  <h1>Convicts convicted near <%= params[:court_county] %></h1>
 <% else %>
   <h1>Convicts</h1>
 <% end %>
 
 <% unless @convicts.empty? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Boat</th>
-        <th>Departure Date</th>
-        <th>Court</th>
-        <th>Destination</th>
-        <th>Term</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @convicts.each do |convict| %>
-        <tr>
-          <td><%= link_to(convict.name, convict) %></td>
-          <td><%= convict.description %></td>
-          <td><%= convict.boat %></td>
-          <td><%= convict.departure_date %></td>
-          <td><%= convict.court %></td>
-          <td><%= convict.destination %></td>
-          <td><%= convict.term %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+
+  <%= will_paginate @convicts %>
+
+  <div id="convicts-table"></div>
+
+  <script>
+    YUI({ filter: 'raw' }).use("datatable-base", function (Y) {
+      var columns = ["name","boat", "departure_date", "court", "destination", "term"];
+      var tableData = <%= raw @convicts.to_json %>;
+
+      datatable = new Y.DataTable.Base({columnset:columns, recordset:tableData, summary:"Convicts"}).render("#convicts-table");
+    });
+  </script>
 
   <%= will_paginate @convicts %>
 <% else %>

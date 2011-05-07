@@ -18,6 +18,10 @@ class ConvictsController < ApplicationController
       @convicts = @convicts.where(:destination => params[:destination]) 
     end
     
+    unless params[:court_county].blank?
+      @convicts = @convicts.where(:court_county => params[:court_county])
+    end
+
     @convicts = @convicts.paginate :page => params[:page]
   end
 

@@ -1,5 +1,19 @@
 <h1>Boats</h1>
 <% unless @boats.empty? %>
+
+  <div id="data-table"></div>
+
+  <script>
+    /*
+    YUI({ filter: 'raw' }).use("datatable-base", function (Y) {
+      var columns = ["boat","convicts", "voyage_count"];
+      var tableData = <%= raw @boats.to_json %>;
+
+      datatable = new Y.DataTable.Base({columnset:columns, recordset:tableData, summary:"Boats"}).render("#data-table");
+    });
+    */
+  </script>
+
   <table>
     <thead>
       <tr>
