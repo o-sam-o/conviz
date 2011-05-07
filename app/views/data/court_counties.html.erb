@@ -13,6 +13,17 @@
     }
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
+    var geocoder = new google.maps.Geocoder();
+
+    <% @counties.each do |county_map| %>
+      <% county = County.find_by_name(county_map[:court_county]) %>
+      new google.maps.Marker({
+        position: new google.maps.LatLng(<%= county.latitude %>, <%= county.longitude %>),
+            map: map,
+            title:"<%= county_map[:convicts] %> Convicts"
+      });
+    <% end %>
+
   });
 
 </script>
