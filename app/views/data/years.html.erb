@@ -1,0 +1,23 @@
+<h1>Departure Year</h1>
+<% unless @years.empty? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Convicts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @years.each do |year_map| %>
+        <tr>
+          <td><%= link_to(year_map[:departure_year], convicts_path(:departure_year => year_map[:departure_year])) %></td>
+          <td><%= year_map[:convicts] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No years</p>
+<% end %>
+
+

@@ -1,0 +1,23 @@
+<h1>Boats</h1>
+<% unless @boats.empty? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Convicts</th>
+        <th>Voyages</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @boats.each do |boat_map| %>
+        <tr>
+          <td><%= link_to(boat_map[:boat], convicts_path(:boat => boat_map[:boat])) %></td>
+          <td><%= boat_map[:convicts] %></td>
+          <td><%= boat_map[:voyage_count] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No boats</p>
+<% end %>

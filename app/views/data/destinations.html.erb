@@ -1,0 +1,22 @@
+<h1>Destinations</h1>
+<% unless @destinations.empty? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Convicts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @destinations.each do |destination_map| %>
+        <tr>
+          <td><%= link_to(destination_map[:destination], convicts_path(:destination => destination_map[:destination])) %></td>
+          <td><%= destination_map[:convicts] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No destinations</p>
+<% end %>
+

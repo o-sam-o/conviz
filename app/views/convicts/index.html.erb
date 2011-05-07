@@ -4,6 +4,15 @@
   <%= submit_tag "Search", :class => "action-button" %>
 <% end %>
 
+<% if params[:boat] %>
+  <h1>Convicts on boat <%= params[:boat] %></h1>
+<% elsif params[:destination] %>
+  <h1>Convicts going to <%= params[:destination] %></h1>
+<% elsif params[:departure_year] %>
+  <h1>Convicts departing <%= params[:departure_year] %></h1>
+<% else %>
+  <h1>Convicts</h1>
+<% end %>
 
 <% unless @convicts.empty? %>
   <table>
@@ -14,6 +23,7 @@
         <th>Boat</th>
         <th>Departure Date</th>
         <th>Court</th>
+        <th>Destination</th>
         <th>Term</th>
       </tr>
     </thead>
@@ -25,6 +35,7 @@
           <td><%= convict.boat %></td>
           <td><%= convict.departure_date %></td>
           <td><%= convict.court %></td>
+          <td><%= convict.destination %></td>
           <td><%= convict.term %></td>
         </tr>
       <% end %>

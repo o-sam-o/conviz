@@ -5,6 +5,18 @@ class ConvictsController < ApplicationController
     unless params[:q].blank?
       @convicts = @convicts.where('name like ?', "%#{params[:q]}%") 
     end
+
+    unless params[:boat].blank?
+      @convicts = @convicts.where(:boat => params[:boat]) 
+    end
+
+    unless params[:departure_year].blank?
+      @convicts = @convicts.where(:departure_year => params[:departure_year]) 
+    end
+    
+    unless params[:destination].blank?
+      @convicts = @convicts.where(:destination => params[:destination]) 
+    end
     
     @convicts = @convicts.paginate :page => params[:page]
   end

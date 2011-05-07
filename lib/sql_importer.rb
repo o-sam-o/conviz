@@ -1,4 +1,5 @@
 require 'sqlite3'
+require 'active_support/all'
 
 `rm convicts.db` if File.exists?('convicts.db')
 db = SQLite3::Database.new "convicts.db"
@@ -18,6 +19,8 @@ db.execute <<-SQL
       description varchar(1024),
       boat varchar(1024),
       departure_date varchar(1024),
+      departure_year int,
+      depature_month int,
       destination varchar(1024),
       court_and_term varchar(1024),
       court varchar(1024),
@@ -45,11 +48,15 @@ File.open("Convict_records.txt", "r") do |infile|
       term = term.gsub(/ on .*/, '')
     end
 
+    departure_date = Date.parse(values[3]) rescue nil
+
     data = {
       name: values[7],
       description: values[0],
       boat: values[2],
       departure_date: values[3],
+      departure_year: departure_date.try(:year),
+      depature_month: departure_date.try(:month),
       destination: values[4],
       court_and_term: court_and_term,
       court: court,
