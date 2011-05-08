@@ -10,21 +10,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110507060607) do
+ActiveRecord::Schema.define(:version => 20110508070615) do
 
   create_table "convicts", :force => true do |t|
-    t.string  "name",           :limit => 1024
-    t.string  "description",    :limit => 1024
-    t.string  "boat",           :limit => 1024
-    t.string  "departure_date", :limit => 1024
-    t.integer "departure_year"
-    t.integer "depature_month"
-    t.string  "destination",    :limit => 1024
-    t.string  "court_and_term", :limit => 1024
-    t.string  "court",          :limit => 1024
-    t.string  "court_county",   :limit => 1024
-    t.string  "term",           :limit => 1024
-    t.string  "source",         :limit => 1024
+    t.string   "name"
+    t.string   "description",     :limit => 1024
+    t.string   "boat"
+    t.date     "departure_date"
+    t.integer  "departure_year"
+    t.integer  "departure_month"
+    t.string   "destination"
+    t.string   "court_and_term"
+    t.string   "court"
+    t.string   "court_county"
+    t.string   "term"
+    t.string   "source",          :limit => 1024
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "counties", :force => true do |t|
@@ -33,6 +35,8 @@ ActiveRecord::Schema.define(:version => 20110507060607) do
     t.string   "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
+    t.string   "alias"
   end
 
 end
