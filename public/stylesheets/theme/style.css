@@ -1,0 +1,304 @@
+/*********************************************************************************************
+
+Theme Name: Transmit
+Theme URI: http://www.press75.com/
+Description: Designed by Jason Schuller
+Version: 1.0.1
+Author: Press75.com
+Author URI: http://www.press75.com/
+
+**********************************************************************************************
+
+Designed and Built by Jason Schuller - theSevenFive.com
+
+CSS, XHTML and Design Files are all Copyright 2007-2011 Circa75 Media, LLC
+
+Be inspired, but please don't steal :)
+
+**********************************************************************************************
+
+0. Import Resets and Base Styles (DO NOT EDIT)
+1. Universal Content Containers
+2. Header Styles
+3. Home Page Styles
+4. Page Styles
+5. Footer Styles
+6. Import Media Styles
+
+**********************************************************************************************/
+
+
+
+
+/* 0. Import Resets and Base Styles (DO NOT EDIT)
+**********************************************************************************************/
+
+@import url(css/reset.css);
+@import url(css/base.css);
+
+
+
+
+/* 1. Universal Content Containers
+**********************************************************************************************/
+
+#main {
+background: url(images/main-bg.png) top left no-repeat;
+border-bottom: 1px solid #EEEEEE;
+padding: 15px 0 15px 0;
+}
+
+.row, .full-width {
+width: 100%;
+float: left;
+}
+
+.section {
+width: 960px;
+margin: 0px auto;
+}
+
+.one-of-two, .two-of-two {
+width: 480px;
+float: left;
+}
+
+.one-quarter {
+width: 25%;
+float: left;
+}
+
+.three-quarters {
+width: 75%;
+float: left;
+}
+
+
+
+
+/* 2. Header Styles
+**********************************************************************************************/
+
+#header {
+background: #211F1D url(images/header-bg.png) top left repeat-x;
+height: 150px;
+}
+
+#header-top {
+height: 21px;
+font-size: 10px;
+color: #CCCCCC;
+margin: 0 0 10px 0;
+padding: 9px 0 0 0;
+}
+
+#header-top a {
+color: #CCCCCC;
+}
+
+#header-top a:hover {
+color: #FFFFFF;
+}
+
+#navigation ul {
+float: right;
+}
+
+#navigation ul li {
+display: inline;
+}
+
+#navigation ul li {
+border-left: 1px solid #666666;
+color: #CCCCCC;
+float: left;
+margin: 0 0 0 10px;
+padding: 0 0 0 10px;
+}
+
+#navigation ul li.first {
+border: none;
+}
+
+#logo h1 a {
+font-family: 'Neuton', arial, serif;
+font-size: 50px;
+color: #FFFFFF;
+}
+
+#logo h1 a:hover {
+color: #CCCCCC;
+}
+
+#rotator img {
+background: url(images/rotator-bg.png) top repeat;
+float: right;
+padding: 15px;
+}
+
+
+
+
+/* 3. Home Page Styles
+**********************************************************************************************/
+
+.widget h3 {
+font-size: 14px;
+margin: 0 0 3px 0;
+padding: 2px 0 2px 23px;
+}
+
+.widget_text {
+background: url(images/text-hatch.png) top left repeat;
+width: 930px;
+float: left;
+padding: 15px;
+margin: 15px 0 15px 0;
+line-height: 20px;
+}
+
+.widget_text img.seven-two-eight {
+margin: 5px 101px 0 101px;
+}
+
+.sf_feed_widget {
+width: 290px;
+float: left;
+padding: 15px;
+font-size: 10px;
+}
+
+.sf_feed_widget ul {
+width: 290px;
+float: left;
+border-bottom: 1px solid #EEEEEE;
+}
+
+.sf_feed_widget li a {
+width: 290px;
+float: left;
+border-top: 1px solid #EEEEEE;
+padding: 5px 0 5px 0;
+}
+
+.sf_feed_widget li a:hover {
+background: #F9F9F9;
+}
+
+.tip {
+color: #CCCCCC;
+background: #211F1D;
+display: none;
+width: 250px;
+padding: 10px;
+position: absolute;    
+z-index: 1000;
+font-size: 10px;
+line-height: 15px;
+
+/* CSS3 Border Radius */
+-webkit-border-radius: 3px;
+-moz-border-radius: 3px;
+border-radius: 3px;
+
+/* CSS3 Box Shadow */
+-moz-box-shadow: 0px 0px 2px #000000;
+-webkit-box-shadow: 0px 0px 2px #000000;
+box-shadow: 0px 0px 2px #000000;
+}
+
+
+
+
+/* 4. Page Styles
+**********************************************************************************************/
+
+h2.page-title {
+background: url(images/text-hatch.png) top left repeat;
+font-family: 'Neuton', arial, serif;
+font-size: 25px;
+width: 930px;
+float: left;
+padding: 10px 15px 15px 15px;
+margin: 15px 0 15px 0;
+}
+
+.page-content {
+line-height: 20px;
+}
+
+.page-content p {
+margin: 0 0 15px 0;
+padding: 0 15px 0 15px;
+}
+
+.page-content h3 {
+padding: 0 15px 0 15px;
+font-size: 14px;
+}
+
+.page-content img {
+border: 1px solid #EEEEEE;
+padding: 10px;
+}
+
+.page-content img.alignright {
+float: right;
+margin: 0 0 20px 20px;
+}
+
+.page-content img.alignleft {
+float: left;
+margin: 0 20px 20px 0;
+}
+
+
+
+
+/* 5. Footer Styles
+**********************************************************************************************/
+
+#footer {
+padding: 10px 0 40px 0;
+}
+
+#footer-left {
+line-height: 20px;
+}
+
+#footer-left h3 {
+font-size: 12px;
+}
+
+#footer-left p {
+font-size: 10px;
+color: #999999;
+}
+
+#footer-left p a {
+border-bottom: 1px dotted #999999;
+color: #999999;
+}
+
+#footer-right {
+text-align: right;
+}
+
+a.twitter-link {
+background: url(images/twitter.png) 0 0 no-repeat;
+padding: 0 0 0 24px;
+}
+
+a.twitter-link:hover {
+background-position: 0 -26px;
+}
+
+
+
+/* 6. Import Media Styles
+**********************************************************************************************/
+
+@import url(css/media.css);
+
+
+

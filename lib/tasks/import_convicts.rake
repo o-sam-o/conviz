@@ -9,11 +9,15 @@ task :insert_convicts => :environment do
 
       p '*' * 20
 
+      full_name = values[7]
+      next if full_name.blank?
+
       court_and_term = values[1]
       if court_and_term =~ /Convicted at (.*) for a term/
         court = $1
       end
 
+      # TODO add better cleaning of term
       if court_and_term =~ /for a term of (.*)/
         term = $1.gsub(/.\s*$/, '')
         term = term.gsub(/ on .*/, '')
@@ -22,7 +26,7 @@ task :insert_convicts => :environment do
       departure_date = Date.parse(values[3]) rescue nil
 
       data = {
-        name: values[7],
+        name: full_name,
         description: values[0],
         boat: values[2],
         departure_date: departure_date,

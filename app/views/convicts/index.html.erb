@@ -1,19 +1,17 @@
-<%= form_tag(convicts_path, :method => "get") do %>
-  <%= label_tag "q", "Search" %> 
-  <input type="search" name="q" value="<%= params[:q] %>" />
-  <%= submit_tag "Search", :class => "action-button" %>
-<% end %>
-
-<% if params[:boat] %>
-  <h1>Convicts on boat <%= params[:boat] %></h1>
-<% elsif params[:destination] %>
-  <h1>Convicts going to <%= params[:destination] %></h1>
-<% elsif params[:departure_year] %>
-  <h1>Convicts departing <%= params[:departure_year] %></h1>
-<% elsif params[:court_county] %>
-  <h1>Convicts convicted near <%= params[:court_county] %></h1>
-<% else %>
-  <h1>Convicts</h1>
+<% content_for :page_header do %>
+  <h2 class="page-title">
+    <% if params[:boat] %>
+      Convicts on boat <%= params[:boat] %>
+    <% elsif params[:destination] %>
+      Convicts going to <%= params[:destination] %>
+    <% elsif params[:departure_year] %>
+      Convicts departing <%= params[:departure_year] %>
+    <% elsif params[:court_county] %>
+      Convicts convicted near <%= params[:court_county] %>
+    <% else %>
+      Convicts
+    <% end %>
+  </h2>
 <% end %>
 
 <% unless @convicts.empty? %>

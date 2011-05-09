@@ -1,22 +1,88 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Convicts</title>
+  <title><%= content_for?(:title) ? (yield :title) : 'ConViz - Convict Record Visualisation' %></title>
+  <%= stylesheet_link_tag 'theme/style.css' %>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
-
+  <%= javascript_include_tag 'theme/modernizr.min.js' %>
+  <%= javascript_include_tag 'theme/tooltip.jquery.js' %>
 
   <%= javascript_include_tag 'highcharts' %>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-
-  <link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/3.3.0/build/cssfonts/fonts-min.css" /> 
   <script type="text/javascript" src="http://yui.yahooapis.com/3.3.0/build/yui/yui-min.js"></script> 
 
+  <link href='http://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css'> 
+
   <%= csrf_meta_tag %>
+
+  <%= yield :head %>
 </head>
 <body class="yui3-skin-sam  yui-skin-sam">
 
-<%= yield %>
+  <div id="header" class="row">
+    <div class="section">
+      <header class="row">
+        <div id="header-top" class="row">
+          <div id="subscribe" class="one-of-two">
+            <p>Bring the British Convict Transportation Registry to life through visualisations</p>
+          </div> <!-- #subscribe .one-of-two -->
+          
+          <div id="navigation" class="two-of-two">
+                      <ul class="header-nav">
+              <li class="first"><a href="/" title="Home">Home</a></li>
+              
+              <li class="page_item page-item-2"><a href="/about" title="About">About</a></li>
+              
+              <li><a href="/about/credits" title="Credits">Credits</a></li>
+            </ul>
+          </div> <!-- #navigation .two-of-two -->
+        </div> <!-- #header-top .row -->
+        
+        <div class="row">
+          <div id="logo" class="one-of-two">
+              <a href="/" title="Home"><img src="/images/logo.png" alt="ConViz"></a>
+          </div> <!-- #logo .one-of-two -->
+          
+          <div id="rotator" class="two-of-two">
+              <%= form_tag(convicts_path, :method => "get", :id => 'convict-search-form') do %>
+                <%= label_tag "q", "Convict Search" %> 
+                <input type="search" name="q" value="<%= params[:q] %>" />
+                <%= submit_tag "Search", :class => "action-button" %>
+              <% end %>
+          </div> <!-- #rotator .two-of-two -->
+        </div> <!-- .row -->
+      </header> <!-- header .row -->
+    </div> <!-- .section -->
+  </div> <!-- #header .row -->
+
+
+  <div class="row">
+    <div class="section">
+      <div id="main" class="full-width">
+
+         <%= yield :page_header %>
+
+         <%= yield %>
+
+      </div>
+    </div>
+  </div>
+
+  <div id="footer" class="row">
+    <div class="section">
+      <footer class="row">
+        <div id="footer-left" class="one-of-two">
+                  <h3>Copyright 2011 Transmit - All Rights Reserved</h3>
+          <p>The "Transmit" <a href="http://www.wordpress.org/" title="WordPress.org">WordPress</a> Theme by <a href="http://www.press75.com/" title="Press75.com">Press75.com</a></p>
+                </div>
+        
+        <div id="footer-right" class="two-of-two">
+                  <p><a class="twitter-link" href="http://twitter.com/press75" title="Twitter.com">Follow Press75.com on Twitter</a></p>
+                </div>
+      </footer> <!-- footer .row -->
+    </div> <!-- .section -->
+  </div> <!-- #footer .row -->
 
 </body>
 </html>
