@@ -1,3 +1,12 @@
+<% content_for :head do %>
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/datatable/assets/skins/sam/datatable.css" /> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datasource/datasource-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/event-delegate/event-delegate-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datatable/datatable-min.js"></script>
+<% end %>
+
 <% content_for :page_header do %>
   <h2 class="page-title">
     <% if params[:boat] %>
@@ -21,12 +30,36 @@
   <div id="convicts-table"></div>
 
   <script>
-    YUI({ filter: 'raw' }).use("datatable-base", function (Y) {
-      var columns = ["name","boat", "departure_date", "court", "destination", "term"];
-      var tableData = <%= raw @convicts.to_json %>;
+    var tableData = <%= raw @convicts.to_json %>;
 
-      datatable = new Y.DataTable.Base({columnset:columns, recordset:tableData, summary:"Convicts"}).render("#convicts-table");
+    YAHOO.util.Event.addListener(window, "load", function() {
+      YAHOO.conviz.Table = function() {
+
+            var columnDefs = [
+                {key:"name", sortable:true, resizeable:true},
+                {key:"boat", sortable:true, resizeable:true},
+                {key:"departure_date", formatter:YAHOO.widget.DataTable.formatDate, sortable:true, resizeable:true},
+                {key:"court", sortable:true, resizeable:true},
+                {key:"destination", sortable:true, resizeable:true},
+                {key:"term", sortable:true, resizeable:true}
+            ];
+     
+            var tableDS = new YAHOO.util.DataSource(tableData);
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+            tableDS.responseSchema = {
+                fields: ["name","boat","departure_date","court","destination", "term"]
+            };
+     
+            var dataTable = new YAHOO.widget.DataTable("convicts-table",
+                    columnDefs, tableDS);
+                    
+            return {
+                oDS: tableDS,
+                oDT: dataTable
+            };
+        }();
     });
+
   </script>
 
   <%= will_paginate @convicts %>
