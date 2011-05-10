@@ -9,3 +9,12 @@
 #convicts-table table {
   width: 100%;
 }
+
+.pagination {
+  padding: 10px 0 10px 0;
+  text-align: right;
+}
+
+.pagination-info {
+  float: left;
+}

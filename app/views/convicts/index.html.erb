@@ -18,13 +18,19 @@
       Convicts departing <%= params[:departure_year] %>
     <% elsif params[:court_county] %>
       Convicts convicted near <%= params[:court_county] %>
+    <% elsif params[:q].present? %>
+      Searching Convicts for <%= params[:q] %>
     <% else %>
-      Convicts
+      Convict Lists
     <% end %>
   </h2>
 <% end %>
 
 <% unless @convicts.empty? %>
+
+  <div class="pagination-info">
+    <%= page_entries_info @convicts %>
+  </div>
 
   <%= will_paginate @convicts %>
 
