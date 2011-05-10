@@ -32,6 +32,7 @@
 
   <script>
     YAHOO.util.Event.addListener(window, "load", function() {
+            var tableData = <%= raw @convicts.to_json %>;
 
             var columnDefs = [
                 {key:"name", label: "Name", sortable:true, resizeable:true},
@@ -42,41 +43,30 @@
                 {key:"term", label: "Term", sortable:true, resizeable:true}
             ];
      
-            var tableDS = new YAHOO.util.DataSource('<%= convicts_path(:format => :json) %>');
-            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSON;
+            var tableDS = new YAHOO.util.DataSource(tableData);
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
             tableDS.responseSchema = {
-                resultsList: "records",
                 fields: ["id", "name","boat","departure_date","court","destination", "term"]
             };
 
-            var generateRequest = function(oState, oSelf) {
-              oState = oState || { sortedBy: null };
-              var sort = (oState.sortedBy) ? oState.sortedBy.key : "name";
-              var direction = (oState.sortedBy && oState.sortedBy.dir === YAHOO.widget.DataTable.CLASS_DESC) ? "desc" : "asc";
- 
-              return  "?sort=" + sort +
-              "&direction=" + direction +
-              "<%= raw params.collect { |value| ['sort', 'direction'].include?(value[0]) ? '' : "&#{value[0]}=#{value[1]}" }.join %>";
-            };
-
-            var tableConfig = {
-              generateRequest: generateRequest,
-              initialRequest: generateRequest(), 
-              dynamicData: true,
-              sortedBy : {key:"name", dir:YAHOO.widget.DataTable.CLASS_DESC}
-            };
-
             var dataTable = new YAHOO.widget.DataTable("convicts-table",
-                    columnDefs, tableDS, tableConfig);
-            
-            // Subscribe to events for row selection
+            columnDefs, tableDS, {sortedBy : {key:"<%= params[:sort] || 'name' %>", dir: <%= params[:direction] == 'asc' ? 'YAHOO.widget.DataTable.CLASS_ASC' : 'YAHOO.widget.DataTable.CLASS_DESC' %>}});
+
+            //Hightlight row on mouse hover
             dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
-            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);            
+            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
+
+            //Handle user clicking on a row
             dataTable.subscribe("rowClickEvent", function(oArgs){
               var elTarget = oArgs.target;
               var oRecord = this.getRecord(elTarget);
               window.location.href = '/convicts/' + oRecord.getData("id");
             }); 
+            // Handle column sorting
+            dataTable.doBeforeSortColumn = function(oColumn, sSortDir) {
+              var direction = (sSortDir === YAHOO.widget.DataTable.CLASS_DESC) ? "desc" : "asc";
+              window.location.href = '/convicts/?sort=' + oColumn.getKey() + "&direction=" + direction + "<%= raw params.collect { |value| ['sort', 'direction'].include?(value[0]) ? '' : "&#{value[0]}=#{value[1]}" }.join %>";
+            };
 
             return {
                 oDS: tableDS,
