@@ -33,31 +33,38 @@
     var tableData = <%= raw @convicts.to_json %>;
 
     YAHOO.util.Event.addListener(window, "load", function() {
-      YAHOO.conviz.Table = function() {
 
             var columnDefs = [
-                {key:"name", sortable:true, resizeable:true},
-                {key:"boat", sortable:true, resizeable:true},
-                {key:"departure_date", formatter:YAHOO.widget.DataTable.formatDate, sortable:true, resizeable:true},
-                {key:"court", sortable:true, resizeable:true},
-                {key:"destination", sortable:true, resizeable:true},
-                {key:"term", sortable:true, resizeable:true}
+                {key:"name", label: "Name", sortable:true, resizeable:true},
+                {key:"boat", label: "Boat", sortable:true, resizeable:true},
+                {key:"departure_date", label: "Departure Date", formatter:YAHOO.widget.DataTable.formatDate, sortable:true, resizeable:true},
+                {key:"court", label: "Court", sortable:true, resizeable:true},
+                {key:"destination", label: "Destination", sortable:true, resizeable:true},
+                {key:"term", label: "Term", sortable:true, resizeable:true}
             ];
      
             var tableDS = new YAHOO.util.DataSource(tableData);
             tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
             tableDS.responseSchema = {
-                fields: ["name","boat","departure_date","court","destination", "term"]
+                fields: ["id", "name","boat","departure_date","court","destination", "term"]
             };
      
             var dataTable = new YAHOO.widget.DataTable("convicts-table",
                     columnDefs, tableDS);
-                    
+            
+            // Subscribe to events for row selection
+            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
+            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);            
+            dataTable.subscribe("rowClickEvent", function(oArgs){
+              var elTarget = oArgs.target;
+              var oRecord = this.getRecord(elTarget);
+              window.location.href = '/convicts/' + oRecord.getData("id");
+            }); 
+
             return {
                 oDS: tableDS,
                 oDT: dataTable
             };
-        }();
     });
 
   </script>
