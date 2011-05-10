@@ -1,7 +1,7 @@
 class ConvictsController < ApplicationController
 
   def index
-    @convicts = Convict.order('name')
+    @convicts = Convict.order("#{params[:sort] || 'name'} #{params[:direction] || 'DESC'}")
     unless params[:q].blank?
       @convicts = @convicts.where('name like ?', "%#{params[:q]}%") 
     end
@@ -23,6 +23,11 @@ class ConvictsController < ApplicationController
     end
 
     @convicts = @convicts.paginate :page => params[:page]
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => {:records => @convicts} }
+    end
   end
 
   def show

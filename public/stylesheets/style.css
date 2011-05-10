@@ -5,3 +5,7 @@
 #convict-search-form label {
   color: #CCC;
 }
+
+#convicts-table table {
+  width: 100%;
+}

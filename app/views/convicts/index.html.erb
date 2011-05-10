@@ -1,6 +1,7 @@
 <% content_for :head do %>
   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/datatable/assets/skins/sam/datatable.css" /> 
-  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/connection/connection-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/json/json-min.js"></script> 
   <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
   <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datasource/datasource-min.js"></script> 
   <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/event-delegate/event-delegate-min.js"></script> 
@@ -27,11 +28,9 @@
 
   <%= will_paginate @convicts %>
 
-  <div id="convicts-table"></div>
+  <div id="convicts-table">Loading ...</div>
 
   <script>
-    var tableData = <%= raw @convicts.to_json %>;
-
     YAHOO.util.Event.addListener(window, "load", function() {
 
             var columnDefs = [
@@ -43,14 +42,32 @@
                 {key:"term", label: "Term", sortable:true, resizeable:true}
             ];
      
-            var tableDS = new YAHOO.util.DataSource(tableData);
-            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+            var tableDS = new YAHOO.util.DataSource('<%= convicts_path(:format => :json) %>');
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSON;
             tableDS.responseSchema = {
+                resultsList: "records",
                 fields: ["id", "name","boat","departure_date","court","destination", "term"]
             };
-     
+
+            var generateRequest = function(oState, oSelf) {
+              oState = oState || { sortedBy: null };
+              var sort = (oState.sortedBy) ? oState.sortedBy.key : "name";
+              var direction = (oState.sortedBy && oState.sortedBy.dir === YAHOO.widget.DataTable.CLASS_DESC) ? "desc" : "asc";
+ 
+              return  "?sort=" + sort +
+              "&direction=" + direction +
+              "<%= raw params.collect { |value| ['sort', 'direction'].include?(value[0]) ? '' : "&#{value[0]}=#{value[1]}" }.join %>";
+            };
+
+            var tableConfig = {
+              generateRequest: generateRequest,
+              initialRequest: generateRequest(), 
+              dynamicData: true,
+              sortedBy : {key:"name", dir:YAHOO.widget.DataTable.CLASS_DESC}
+            };
+
             var dataTable = new YAHOO.widget.DataTable("convicts-table",
-                    columnDefs, tableDS);
+                    columnDefs, tableDS, tableConfig);
             
             // Subscribe to events for row selection
             dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
