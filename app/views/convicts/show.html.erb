@@ -4,13 +4,21 @@
   </h2>
 <% end %>
 
-<div class="page-content">
+<div class="page-content" style="width: 600px;">
   <h3>About</h3>
-  <p><%= @convict.description %></p>
+  <p><%= @convict.description %>. <%= @convict.court_and_term %> Transported to <%= @convict.raw_destination %>.</p>
 
   <h3>Other Information</h3>
   <p>
   <strong>Boat:</strong> <%= link_to @convict.boat, convicts_path(:boat =>  @convict.boat) %><br/>
-  TODO add the rest + map of origin and destination
+  <strong>Departed:</strong> <%= link_to @convict.departure_date, convicts_path(:year =>  @convict.departure_year) %><br/>
+  <strong>Destination:</strong> <%= link_to @convict.destination, convicts_path(:destination =>  @convict.destination) %><%= ", #{@convict.destination_state}" unless @convict.destination_state.nil? %><br/>
+  <strong>Court:</strong> <%= @convict.court %> <% unless @convict.court_county.blank? %> in <%= link_to @convict.court_county, convicts_path(:court_county =>  @convict.court_county) %> <% end %><br/>
+  <strong>Term:</strong> <%= @convict.term =~ /^\d+$/ ? pluralize(@convict.term.to_i, 'year') : @convict.term.titleize %>
+  </p>
+
+  <h3>Boring Stuff</h3>
+  <p>
+    <%= @convict.source %>: <%= @convict.copyright %>.
   </p>
 </div>

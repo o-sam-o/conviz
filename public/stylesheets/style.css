@@ -18,3 +18,8 @@
 .pagination-info {
   float: left;
 }
+
+.bordered {
+  border: 1px solid #EEE;
+  padding: 10px;
+}  

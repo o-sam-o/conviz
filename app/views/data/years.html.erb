@@ -1,10 +1,22 @@
 <% content_for :head do %>
   <%= javascript_include_tag 'highcharts' %>
+
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/datatable/assets/skins/sam/datatable.css" /> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/json/json-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datasource/datasource-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/event-delegate/event-delegate-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datatable/datatable-min.js"></script>
+
 <% end %>
 
-<h1>Departure Year</h1>
+<% content_for :page_header do %>
+  <h2 class="page-title">Departure Year</h2>
+<% end %>
 
-<div id="year-graph"> </div>
+<div class="bordered" style="clear: both;">
+  <div id="year-graph"> </div>
+</div>
 
 <script>
 var chart;
@@ -17,11 +29,19 @@ $(document).ready(function() {
       title: {
          text: 'Convict Departure Year'
       },
+      xAxis: {
+        allowDecimals: false,
+        labels: {
+          formatter: function() {
+            return "" + this.value;
+          }
+        }
+      },
       yAxis: {
          min: 0,
          title: {
             text: 'Convict Count'
-         }
+          }
       },
       legend: {
          layout: 'vertical',
@@ -54,26 +74,44 @@ $(document).ready(function() {
 });
 </script>
 
+<br/>
 
-<% unless @years.empty? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Year</th>
-        <th>Convicts</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @years.each do |year_map| %>
-        <tr>
-          <td><%= link_to(year_map[:departure_year], convicts_path(:departure_year => year_map[:departure_year])) %></td>
-          <td><%= year_map[:convicts] %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No years</p>
-<% end %>
+<div id="data-table">Loading ...</div>
 
+<script>
 
+    YAHOO.util.Event.addListener(window, "load", function() {
+            var tableData = <%= raw @years.to_json %>;
+
+            var columnDefs = [
+                {key:"departure_year", label: "Departure Year", sortable:true, resizeable:true},
+                {key:"convicts", label: "Convicts", sortable:true, resizeable:true},
+            ];
+     
+            var tableDS = new YAHOO.util.DataSource(tableData);
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+            tableDS.responseSchema = {
+                fields: ["departure_year", "convicts"]
+            };
+
+            var dataTable = new YAHOO.widget.DataTable("data-table",
+              columnDefs, tableDS, {sortedBy : {key:"departure_year", dir: 'desc'}});
+
+            //Hightlight row on mouse hover
+            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
+            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
+
+            //Handle user clicking on a row
+            dataTable.subscribe("rowClickEvent", function(oArgs){
+              var elTarget = oArgs.target;
+              var oRecord = this.getRecord(elTarget);
+              window.location.href = '/convicts/?departure_year=' + oRecord.getData("departure_year");
+            }); 
+
+            return {
+                oDS: tableDS,
+                oDT: dataTable
+            };
+    });
+
+</script>
