@@ -56,7 +56,7 @@
             };
 
             var dataTable = new YAHOO.widget.DataTable("convicts-table",
-            columnDefs, tableDS, {sortedBy : {key:"<%= params[:sort] || 'name' %>", dir: <%= params[:direction] == 'asc' ? 'YAHOO.widget.DataTable.CLASS_ASC' : 'YAHOO.widget.DataTable.CLASS_DESC' %>}});
+            columnDefs, tableDS, {sortedBy : {key:"<%= params[:sort] || 'name' %>", dir: <%= params[:direction] == 'desc' ? 'YAHOO.widget.DataTable.CLASS_DESC' : 'YAHOO.widget.DataTable.CLASS_ASC' %>}});
 
             //Hightlight row on mouse hover
             dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
