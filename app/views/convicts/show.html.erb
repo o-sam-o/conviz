@@ -1,8 +1,16 @@
-<div>
-   <h1><%= @convict.name %></h1>
-   <div><%= @convict.description %></div>
-   <div><%= @convict.boat %></div>
-   <div><%= @convict.departure_date %></div>
-   <div><%= @convict.court %></div>
-   <div><%= @convict.term %></div>
+<% content_for :page_header do %>
+  <h2 class="page-title">
+    <%= @convict.name %>
+  </h2>
+<% end %>
+
+<div class="page-content">
+  <h3>About</h3>
+  <p><%= @convict.description %></p>
+
+  <h3>Other Information</h3>
+  <p>
+  <strong>Boat:</strong> <%= link_to @convict.boat, convicts_path(:boat =>  @convict.boat) %><br/>
+  TODO add the rest + map of origin and destination
+  </p>
 </div>
