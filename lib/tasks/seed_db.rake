@@ -128,11 +128,31 @@ namespace :seed do
     insert_county(:name => 'Wicklow', :country => 'UK')
   end
 
+  desc 'populates the destinations table'
+  task :destinations => :environment do
+    insert_destination(:name => 'Norfolk Island', :state => 'NSW') 
+    insert_destination(:name => "Port Phillip", :state => 'VIC') 
+    insert_destination(:name => "Maria Island", :state => 'TAS') 
+    insert_destination(:name => "New South Wales", :state => 'NSW') 
+    insert_destination(:name => "Moreton Bay", :state => 'QLD') 
+    insert_destination(:name => "Western Australia", :state => 'WA') 
+    insert_destination(:name => "Van Diemen's Land", :current_name => 'Tasmania', :state => 'TAS') 
+  end
+
   def insert_county(params)
     p params[:name]
     geo_result = Geokit::Geocoders::MultiGeocoder.geocode("#{params[:name]}, #{params[:country]}")
     params[:latitude] = geo_result.lat.to_s
     params[:longitude] = geo_result.lng.to_s
     County.create!(params)
+  end
+
+  def insert_destination(params)
+    p params[:name]
+    params[:current_name] = params[:name] unless params.key?(:current_name)
+    geo_result = Geokit::Geocoders::MultiGeocoder.geocode("#{params[:current_name]}, #{params[:state]}")
+    params[:latitude] = geo_result.lat.to_s
+    params[:longitude] = geo_result.lng.to_s
+    Destination.create!(params)
   end
 end
