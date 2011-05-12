@@ -22,4 +22,32 @@
 .bordered {
   border: 1px solid #EEE;
   padding: 10px;
-}  
+  clear: both;
+}
+
+#year-graph-container {
+  float: left;
+  width: 700px;
+}
+
+#year-table-container {
+  float: right;
+}
+
+.widget-section-title {
+  border-bottom: 1px solid #EEE;
+}
+
+.widget-title-graph-icon {
+  background: url(images/graph_icon_16.png) left no-repeat; 
+  background-size: 16px;
+}
+
+.widget-title-table-icon {
+  background: url(images/table_icon_16.png) left no-repeat; 
+  background-size: 16px;  
+}
+
+#data-table {
+  padding-top: 5px;
+}

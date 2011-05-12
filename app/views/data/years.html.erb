@@ -11,10 +11,11 @@
 <% end %>
 
 <% content_for :page_header do %>
-  <h2 class="page-title">Departure Year</h2>
+  <h2 class="page-title">Departure Date</h2>
 <% end %>
 
-<div class="bordered" style="clear: both;">
+<div id="year-graph-container" class="widget">
+  <h3 class="widget-section-title widget-title-graph-icon">Convicts vs Year of Departure</h3>
   <div id="year-graph"> </div>
 </div>
 
@@ -24,17 +25,24 @@ $(document).ready(function() {
    chart = new Highcharts.Chart({
       chart: {
          renderTo: 'year-graph',
-         defaultSeriesType: 'area'
+         defaultSeriesType: 'area',
+         height: 350
       },
       title: {
-         text: 'Convict Departure Year'
+         text: null
+      },
+      credits: {
+        enabled: false
       },
       xAxis: {
         allowDecimals: false,
         labels: {
           formatter: function() {
             return "" + this.value;
-          }
+          },
+         title: {
+            text: 'Departure Year'
+          }          
         }
       },
       yAxis: {
@@ -74,9 +82,11 @@ $(document).ready(function() {
 });
 </script>
 
-<br/>
 
-<div id="data-table">Loading ...</div>
+<div id="year-table-container" class="widget">
+  <h3 class="widget-section-title widget-title-table-icon">Browse By Year</h3>
+  <div id="data-table">Loading ...</div>
+</div>
 
 <script>
 
