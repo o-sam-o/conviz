@@ -111,7 +111,10 @@ $(document).ready(function() {
       },
       plotOptions: {
          area: {
-           pointStart: <%= @years.first[:departure_year] %>
+           pointStart: <%= @years.first[:departure_year] %>,
+            marker: {
+              enabled: false
+            }
         }
       },
       series: [{
@@ -177,7 +180,7 @@ $(document).ready(function() {
       tooltip: {
          formatter: function() {
             return ''+
-               this.x +': '+ this.y +' convicts';
+               this.x +': '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
          }
       },
       plotOptions: {
@@ -212,4 +215,49 @@ $(document).ready(function() {
    
 </script>  
 
+<div id="decades-graph-container" class="widget">
+  <h3 class="widget-section-title widget-title-graph-icon">Decades of Convict Departure</h3>
+  <div id="decades-graph"> </div>
+</div>
 
+<script>
+$(document).ready(function() {
+   new Highcharts.Chart({
+      chart: {
+         renderTo: 'decades-graph',
+         plotBackgroundColor: null,
+         plotBorderWidth: null,
+         plotShadow: false
+      },
+      title: {
+         text: null
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
+         }
+      },
+      plotOptions: {
+         pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: true,
+               color:'#000000',
+               connectorColor: '#000000',
+               formatter: function() {
+                  return '<b>'+ this.point.name +'</b>'
+               }
+            }
+         }
+      },
+       series: [{
+         type: 'pie',
+         name: 'Decades of Convict Departure',
+         data: [
+            <%= @decades.collect { |v| "['#{v[0]}', #{v[1]}]"  }.join(', ')  %>
+         ]
+      }]
+   });
+});
+</script>

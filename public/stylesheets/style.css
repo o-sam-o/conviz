@@ -25,7 +25,7 @@
   clear: both;
 }
 
-#year-graph-container, #month-graph-container, #decade-graph-container{
+#year-graph-container, #month-graph-container, #decades-graph-container{
   float: left;
   width: 700px;
 }

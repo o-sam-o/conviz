@@ -15,6 +15,14 @@ class DataController < ApplicationController
       result
     end
     @months = query_to_map("select departure_month,  count(*) as convicts from convicts where departure_month is not null group by departure_month order by departure_month")
+
+    @decades = {}
+    start_year = 1780
+    until start_year == 1870
+      end_year = start_year + 10
+      @decades["#{start_year}-#{end_year}"] = ActiveRecord::Base.connection.execute("select count(*) as convicts from convicts where departure_year >= #{start_year} and departure_year < #{end_year}").first['convicts']
+      start_year = end_year
+    end
   end
 
   def court_counties
