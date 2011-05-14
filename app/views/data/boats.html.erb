@@ -1,37 +1,64 @@
-<h1>Boats</h1>
+<% content_for :head do %>
+  <%= javascript_include_tag 'highcharts' %>
+
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/datatable/assets/skins/sam/datatable.css" /> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/json/json-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datasource/datasource-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/event-delegate/event-delegate-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datatable/datatable-min.js"></script>
+
+<% end %>
+
+<% content_for :page_header do %>
+  <h2 class="page-title">Convict Boats</h2>
+<% end %>
+
 <% unless @boats.empty? %>
 
-  <div id="data-table"></div>
+  <div id="boats-table-container" class="widget" style="clear: both;">
+    <h3 class="widget-section-title widget-title-table-icon">Browse By Boat</h3>
+    <div id="data-table">Loading ...</div>
+  </div>
 
   <script>
-    /*
-    YUI({ filter: 'raw' }).use("datatable-base", function (Y) {
-      var columns = ["boat","convicts", "voyage_count"];
-      var tableData = <%= raw @boats.to_json %>;
+    YAHOO.util.Event.addListener(window, "load", function() {
+            var tableData = <%= raw @boats.to_json %>;
 
-      datatable = new Y.DataTable.Base({columnset:columns, recordset:tableData, summary:"Boats"}).render("#data-table");
+            var columnDefs = [
+                {key:"boat", label: "Boat", sortable:true, resizeable:true},
+                {key:"convicts", label: "Convicts", sortable:true, resizeable:true},
+                {key:"voyage_count", label: "Voyages", sortable:true, resizeable:true},
+            ];
+     
+            var tableDS = new YAHOO.util.DataSource(tableData);
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+            tableDS.responseSchema = {
+                fields: ["boat", "convicts", "voyage_count"]
+            };
+
+            var dataTable = new YAHOO.widget.DataTable("data-table",
+              columnDefs, tableDS, {sortedBy : {key:"boat", dir: 'desc'}});
+
+            //Hightlight row on mouse hover
+            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
+            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
+
+            //Handle user clicking on a row
+            dataTable.subscribe("rowClickEvent", function(oArgs){
+              var elTarget = oArgs.target;
+              var oRecord = this.getRecord(elTarget);
+              window.location.href = '/convicts/?boat=' + oRecord.getData("boat");
+            }); 
+
+            return {
+                oDS: tableDS,
+                oDT: dataTable
+            };
     });
-    */
+
   </script>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Convicts</th>
-        <th>Voyages</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @boats.each do |boat_map| %>
-        <tr>
-          <td><%= link_to(boat_map[:boat], convicts_path(:boat => boat_map[:boat])) %></td>
-          <td><%= boat_map[:convicts] %></td>
-          <td><%= boat_map[:voyage_count] %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 <% else %>
   <p>No boats</p>
 <% end %>

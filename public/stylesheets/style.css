@@ -51,3 +51,11 @@
 #data-table {
   padding-top: 5px;
 }
+
+#boats-table-container {
+  clear: both;
+}
+
+#boats-table-container table {
+  width: 100%;
+}
