@@ -1,15 +1,21 @@
+# Conviz
+
+## Coming Soon
+
+## Notes
+
 Ideas
 
 Done
  * Convicts per year
  * Boats
  * Origin
+ * Departure month
 
 Pending
  * Destinations
  * Sentence Duration
  * Name Frequency
- * Departure month
  * Convict photos
  * Add an indicator about fleet number e.g. leaving 1787 is first fleet
  * Link boats to wikipedia
