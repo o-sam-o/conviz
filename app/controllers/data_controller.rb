@@ -8,7 +8,7 @@ class DataController < ApplicationController
     @destinations = query_to_map("select destination, count(*) as convicts from convicts group by destination order by destination")
   end
 
-  def years
+  def departure_date
     @years = query_to_map("select departure_year, count(*) as convicts from convicts where departure_year is not null group by departure_year order by departure_year")
     @years_map = @years.inject({}) do |result, map| 
       result[map[:departure_year]] = map[:convicts]

@@ -232,6 +232,9 @@ $(document).ready(function() {
       title: {
          text: null
       },
+      credits: {
+        enabled: false
+      },      
       tooltip: {
          formatter: function() {
             return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
