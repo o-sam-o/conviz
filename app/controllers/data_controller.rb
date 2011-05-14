@@ -14,6 +14,7 @@ class DataController < ApplicationController
       result[map[:departure_year]] = map[:convicts]
       result
     end
+    @months = query_to_map("select departure_month,  count(*) as convicts from convicts where departure_month is not null group by departure_month order by departure_month")
   end
 
   def court_counties

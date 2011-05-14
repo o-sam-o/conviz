@@ -14,15 +14,57 @@
   <h2 class="page-title">Departure Date</h2>
 <% end %>
 
+<div id="year-table-container" class="widget">
+  <h3 class="widget-section-title widget-title-table-icon">Browse By Year</h3>
+  <div id="data-table">Loading ...</div>
+</div>
+
+<script>
+
+    YAHOO.util.Event.addListener(window, "load", function() {
+            var tableData = <%= raw @years.to_json %>;
+
+            var columnDefs = [
+                {key:"departure_year", label: "Departure Year", sortable:true, resizeable:true},
+                {key:"convicts", label: "Convicts", sortable:true, resizeable:true},
+            ];
+     
+            var tableDS = new YAHOO.util.DataSource(tableData);
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+            tableDS.responseSchema = {
+                fields: ["departure_year", "convicts"]
+            };
+
+            var dataTable = new YAHOO.widget.DataTable("data-table",
+              columnDefs, tableDS, {sortedBy : {key:"departure_year", dir: 'desc'}});
+
+            //Hightlight row on mouse hover
+            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
+            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
+
+            //Handle user clicking on a row
+            dataTable.subscribe("rowClickEvent", function(oArgs){
+              var elTarget = oArgs.target;
+              var oRecord = this.getRecord(elTarget);
+              window.location.href = '/convicts/?departure_year=' + oRecord.getData("departure_year");
+            }); 
+
+            return {
+                oDS: tableDS,
+                oDT: dataTable
+            };
+    });
+
+</script>
+
 <div id="year-graph-container" class="widget">
   <h3 class="widget-section-title widget-title-graph-icon">Convicts vs Year of Departure</h3>
   <div id="year-graph"> </div>
 </div>
 
 <script>
-var chart;
 $(document).ready(function() {
-   chart = new Highcharts.Chart({
+   new Highcharts.Chart({
       chart: {
          renderTo: 'year-graph',
          defaultSeriesType: 'area',
@@ -82,46 +124,92 @@ $(document).ready(function() {
 });
 </script>
 
-
-<div id="year-table-container" class="widget">
-  <h3 class="widget-section-title widget-title-table-icon">Browse By Year</h3>
-  <div id="data-table">Loading ...</div>
+<div id="month-graph-container" class="widget">
+  <h3 class="widget-section-title widget-title-graph-icon">Convicts vs Month of Departure</h3>
+  <div id="month-graph"> </div>
 </div>
 
 <script>
+$(document).ready(function() {
+   new Highcharts.Chart({
+      chart: {
+         renderTo: 'month-graph',
+         defaultSeriesType: 'column'
+      },
+      title: {
+         text: null
+      },
+      credits: {
+        enabled: false
+      },
+      xAxis: {
+         categories: [
+            'Jan', 
+            'Feb', 
+            'Mar', 
+            'Apr', 
+            'May', 
+            'Jun', 
+            'Jul', 
+            'Aug', 
+            'Sep', 
+            'Oct', 
+            'Nov', 
+            'Dec'
+         ]
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'Convicts'
+         },
+      },
+      legend: {
+         layout: 'vertical',
+         backgroundColor: '#FFFFFF',
+         align: 'left',
+         verticalAlign: 'top',
+         x: 100,
+         y: 70,
+         floating: true,
+         shadow: true
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+               this.x +': '+ this.y +' convicts';
+         }
+      },
+      plotOptions: {
+         column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+         }
+      },
+     series: [{
+         name: 'Month',
+         data: [<%= @months.collect { |m| m[:convicts] }.join(', ') %>],
+         dataLabels: {
+            enabled: true,
+            rotation: -90,
+            color: '#FFFFFF',
+            align: 'right',
+            x: -3,
+            y: 10,
+            formatter: function() {
+               return Highcharts.numberFormat(this.y, 0, ',');
+            },
+            style: {
+               font: 'normal 13px Verdana, sans-serif'
+            }
+         }   
+         
+     }]
+   });
+   
+   
+});
+   
+</script>  
 
-    YAHOO.util.Event.addListener(window, "load", function() {
-            var tableData = <%= raw @years.to_json %>;
 
-            var columnDefs = [
-                {key:"departure_year", label: "Departure Year", sortable:true, resizeable:true},
-                {key:"convicts", label: "Convicts", sortable:true, resizeable:true},
-            ];
-     
-            var tableDS = new YAHOO.util.DataSource(tableData);
-            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-            tableDS.responseSchema = {
-                fields: ["departure_year", "convicts"]
-            };
-
-            var dataTable = new YAHOO.widget.DataTable("data-table",
-              columnDefs, tableDS, {sortedBy : {key:"departure_year", dir: 'desc'}});
-
-            //Hightlight row on mouse hover
-            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
-            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
-
-            //Handle user clicking on a row
-            dataTable.subscribe("rowClickEvent", function(oArgs){
-              var elTarget = oArgs.target;
-              var oRecord = this.getRecord(elTarget);
-              window.location.href = '/convicts/?departure_year=' + oRecord.getData("departure_year");
-            }); 
-
-            return {
-                oDS: tableDS,
-                oDT: dataTable
-            };
-    });
-
-</script>
