@@ -16,6 +16,74 @@
 
 <% unless @boats.empty? %>
 
+  <div class="graphs-container">
+    <div id="top-boats-graph-container" class="widget">
+      <h3 class="widget-section-title widget-title-graph-icon">Boats That Transported the Most Convicts</h3>
+      <div id="top-boats-graph"> </div>
+    </div>
+
+    <script>
+$(document).ready(function() {
+   new Highcharts.Chart({
+      chart: {
+         renderTo: 'top-boats-graph',
+         defaultSeriesType: 'bar'
+      },
+      title: {
+         text: null
+      },
+      xAxis: {
+        categories: <%= raw @top_boats.collect { |m| m[:boat] }.to_json %>,
+         title: {
+            text: null
+         }
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'Convicts',
+            align: 'high'
+         }
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+                this.series.name +': '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
+         }
+      },
+      plotOptions: {
+         bar: {
+            dataLabels: {
+               enabled: true
+            }
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         align: 'right',
+         verticalAlign: 'top',
+         x: -100,
+         y: 100,
+         floating: true,
+         borderWidth: 1,
+         backgroundColor: '#FFFFFF',
+         shadow: true
+      },
+      credits: {
+         enabled: false
+      },
+      series: [{
+        name: 'Convict Boats',
+        data: <%= raw @top_boats.collect { |m| m[:convicts] }.to_json %>
+      }]
+    });
+   });
+
+    </script>
+
+  </div>
+
+
   <div id="boats-table-container" class="widget" style="clear: both;">
     <h3 class="widget-section-title widget-title-table-icon">Browse By Boat</h3>
     <div id="data-table">Loading ...</div>

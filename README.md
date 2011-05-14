@@ -29,6 +29,9 @@ Pending
 Data to clean:
  * Destination
 
+TODO
+ * Fix YUI tables to allow SEO
+
 http://members.iinet.net.au/~perthdps/convicts/index.html
 
 West Aust Ships:

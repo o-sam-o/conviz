@@ -59,3 +59,11 @@
 #boats-table-container table {
   width: 100%;
 }
+
+.graphs-container {
+  clear:both;
+}
+
+#top-boats-graph-container {
+  width: 450px;
+}
