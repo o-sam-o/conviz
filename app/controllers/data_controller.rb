@@ -2,7 +2,7 @@ class DataController < ApplicationController
 
   def boats
     @boats = query_to_map("select boat, count(*) as convicts, count(distinct(departure_date)) as voyage_count from convicts group by boat order by boat")
-    @top_boats = query_to_map("select boat, count(*) as convicts from convicts group by boat order by count(*) desc limit 10")
+    @top_boats = query_to_map("select boat, count(*) as convicts from convicts group by boat order by count(*) desc limit 100")
   end
 
   def destinations

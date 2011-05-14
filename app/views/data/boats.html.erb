@@ -8,6 +8,7 @@
   <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/event-delegate/event-delegate-min.js"></script> 
   <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datatable/datatable-min.js"></script>
 
+  <%= javascript_include_tag 'protovis-r3.2' %>
 <% end %>
 
 <% content_for :page_header do %>
@@ -33,16 +34,17 @@ $(document).ready(function() {
          text: null
       },
       xAxis: {
-        categories: <%= raw @top_boats.collect { |m| m[:boat] }.to_json %>,
+        categories: <%= raw @top_boats[0..8].collect { |m| m[:boat] }.to_json %>,
          title: {
             text: null
          }
       },
       yAxis: {
          min: 0,
+         maxPadding: 0.3,
+         endOnTick: false,
          title: {
-            text: 'Convicts',
-            align: 'high'
+            text: 'Convicts'
          }
       },
       tooltip: {
@@ -61,9 +63,9 @@ $(document).ready(function() {
       legend: {
          layout: 'vertical',
          align: 'right',
-         verticalAlign: 'top',
-         x: -100,
-         y: 100,
+         verticalAlign: 'bottom',
+         x: -20,
+         y: -50,
          floating: true,
          borderWidth: 1,
          backgroundColor: '#FFFFFF',
@@ -74,12 +76,56 @@ $(document).ready(function() {
       },
       series: [{
         name: 'Convict Boats',
-        data: <%= raw @top_boats.collect { |m| m[:convicts] }.to_json %>
+        data: <%= raw @top_boats[0..8].collect { |m| m[:convicts] }.to_json %>
       }]
     });
    });
 
     </script>
+
+    <div id="boats-bubble-graph-container" class="widget">
+      <h3 class="widget-section-title widget-title-graph-icon">Top 100 Boats</h3>
+      <div id="boats-bubble-graph"> </div>
+
+      <script type="text/javascript+protovis">
+          var convictBoats = {
+            <%= raw @top_boats.collect { |m| "'#{m[:boat]}': #{m[:convicts]}" }.join(', ') %>
+          };
+
+
+          /* Copied from source, ideally i would like to get rid of this */
+          var classes = pv.nodes(pv.flatten(convictBoats).leaf(Number).array());
+          classes.slice(1).forEach(function(d) {
+            d.nodeName = d.nodeValue.keys.join(".");
+            var i = d.nodeName.lastIndexOf(".");
+            d.className = d.nodeName.substring(i + 1);
+            d.packageName = d.nodeName.substring(0, i);
+            d.nodeValue = d.nodeValue.value;
+          });
+           
+          /* For pretty number formatting. */
+          var format = pv.Format.number();
+           
+          var vis = new pv.Panel()
+              .width(420)
+              .height(390);
+           
+          vis.add(pv.Layout.Pack)
+              .top(-10)  
+              .nodes(classes)
+              .size(function(d) d.nodeValue)
+              .spacing(0)
+              .order(null)
+            .node.add(pv.Dot)
+              .fillStyle(pv.Colors.category20().by(function(d) d.nodeName))
+              .strokeStyle(function() this.fillStyle().darker())
+              .visible(function(d) d.parentNode)  
+              .title(function(d) d.nodeName + ": " + format(d.nodeValue) + ' convicts')
+            .anchor("boats-bubble-graph");
+           
+          vis.render();
+      </script>
+    </div>
 
   </div>
 

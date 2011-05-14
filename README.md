@@ -25,6 +25,9 @@ Pending
  * Pie chart sentence
  * Provide links to famous convicts
  * Add map ect to convict page
+ * Make convicts per year a stack graph also showing destination state
+ * Make the top boats graph a stacked bar graph showing how many
+   convicts per each voyage
 
 Data to clean:
  * Destination

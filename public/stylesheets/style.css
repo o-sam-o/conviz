@@ -62,8 +62,20 @@
 
 .graphs-container {
   clear:both;
+  position: relative;
+  height: 410px;
 }
 
 #top-boats-graph-container {
   width: 450px;
+  position: absolute;
+  right: 10px;
+  top 5px;  
+}
+
+#boats-bubble-graph-container {
+  width: 450px;
+  position: absolute;
+  left: 5px;
+  top 5px;
 }
