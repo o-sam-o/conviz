@@ -33,6 +33,7 @@ Data to clean:
  * Destination
 
 TODO
+ * Fix search location css
  * Fix YUI tables to allow SEO
 
 http://members.iinet.net.au/~perthdps/convicts/index.html

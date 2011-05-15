@@ -108,10 +108,11 @@ $(document).ready(function() {
            
           var vis = new pv.Panel()
               .width(420)
-              .height(390);
+              .height(380);
            
           vis.add(pv.Layout.Pack)
               .top(-10)  
+              .bottom(-20)  
               .nodes(classes)
               .size(function(d) d.nodeValue)
               .spacing(0)
@@ -125,6 +126,7 @@ $(document).ready(function() {
            
           vis.render();
       </script>
+      <p class="notes">Hover mouse to see boat name and number of convicts</p>
     </div>
 
   </div>
