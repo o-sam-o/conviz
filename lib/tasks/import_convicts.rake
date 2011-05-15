@@ -38,7 +38,7 @@ task :insert_convicts => :environment do
         first_name: first_name,
         last_name: last_name,
         description: values[0],
-        boat: values[2],
+        boat: clean_boat(values[2]),
         departure_date: departure_date,
         departure_year: departure_date.try(:year),
         departure_month: departure_date.try(:month),
@@ -92,7 +92,23 @@ def clean_destination(destination)
   end
 end
 
+# FIXME this doesnt seem to be working
 def destination_state(destination)
   @dest_map ||= Destination.all.inject({}) { |result, value| result[value[0]] = value[1]; result }
   @dest_map[destination].try(:state)
+end
+
+def clean_boat(boat)
+  case boat
+  when  /Lady Palmira/ then 'Lady Palmira'
+  when  /Lord Lynedoch/ then 'Lord Lynedoch'
+  when  /Barossa/ then 'Barrosa'
+  when  /Bussorah Marchant/ then 'Bussorah Merchant'
+  when  /Earl Gray/ then 'Earl Grey'
+  when  /Guilford/ then 'Guildford'
+  when  /Mount Stuart Elphinstone/ then 'Mount Stuart Elphinstone'
+  when  /Lady Palmira.[Palmyra]/ then 'Lady Palmira [Palmyra]'
+  when  /^Departure:/ then nil
+  else boat
+  end
 end
