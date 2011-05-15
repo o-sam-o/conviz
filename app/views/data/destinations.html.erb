@@ -1,22 +1,98 @@
-<h1>Destinations</h1>
-<% unless @destinations.empty? %>
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Convicts</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @destinations.each do |destination_map| %>
-        <tr>
-          <td><%= link_to(destination_map[:destination], convicts_path(:destination => destination_map[:destination])) %></td>
-          <td><%= destination_map[:convicts] %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% else %>
-  <p>No destinations</p>
+<% content_for :head do %>
+  <%= javascript_include_tag 'highcharts' %>
+
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/datatable/assets/skins/sam/datatable.css" /> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/json/json-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datasource/datasource-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/event-delegate/event-delegate-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datatable/datatable-min.js"></script>
+
+  <script type='text/javascript' src='https://www.google.com/jsapi'></script>
 <% end %>
 
+<% content_for :page_header do %>
+  <h2 class="page-title">Convict Destinations</h2>
+<% end %>
+
+<div id="destinations-page-container">
+<% unless @destinations.empty? %>
+
+  <div id="destinations-table-container" class="widget">
+    <h3 class="widget-section-title widget-title-table-icon">Browse By Destinations</h3>
+    <div id="data-table">Loading ...</div>
+  </div>
+
+  <script>
+    YAHOO.util.Event.addListener(window, "load", function() {
+            var tableData = <%= raw @destinations.to_json %>;
+
+            var columnDefs = [
+                {key:"destination", label: "Destination", sortable:true, resizeable:true},
+                {key:"convicts", label: "Convicts", formatter: "number", sortable:true, resizeable:true},
+            ];
+     
+            var tableDS = new YAHOO.util.DataSource(tableData);
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+            tableDS.responseSchema = {
+                fields: ["destination", "convicts"]
+            };
+
+            var dataTable = new YAHOO.widget.DataTable("data-table",
+              columnDefs, tableDS, {sortedBy : {key:"destination", dir: 'desc'}});
+
+            //Hightlight row on mouse hover
+            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
+            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
+
+            //Handle user clicking on a row
+            dataTable.subscribe("rowClickEvent", function(oArgs){
+              var elTarget = oArgs.target;
+              var oRecord = this.getRecord(elTarget);
+              window.location.href = '/convicts/?destination=' + oRecord.getData("destination");
+            }); 
+
+            return {
+                oDS: tableDS,
+                oDT: dataTable
+            };
+    });
+  </script>
+
+  <div id="destinations-map-container" class="widget">
+    <h3 class="widget-section-title widget-title-graph-icon">Convict Destinations Map</h3>
+    <div id="destinations-map">Loading ...</div>
+  </div>
+
+  <script type='text/javascript'>
+   google.load('visualization', '1', {'packages': ['geomap']});
+   google.setOnLoadCallback(drawMap);
+
+    function drawMap() {
+      var data = new google.visualization.DataTable();
+      data.addRows(<%= @aust_destinations.size %>);
+      data.addColumn('string', 'City');
+      data.addColumn('number', 'Convicts');
+
+      <% @aust_destinations.each_with_index do |value, index| %>
+        data.setValue(<%= index %>, 0, '<%= value[0] %>');
+        data.setValue(<%= index %>, 1, <%= value[1] %>);
+      <% end %>
+
+      var options = {};
+      options['region'] = 'AU';
+      options['colors'] = [0xFF8747, 0xFFB581, 0xc06000]; //orange colors
+      options['dataMode'] = 'markers';
+      options['height'] = 205;
+      options['width'] = 490;
+
+      var container = document.getElementById('destinations-map');
+      var geomap = new google.visualization.GeoMap(container);
+      geomap.draw(data, options);
+    }
+  </script>
+
+ <% else %>
+  <p>No destinations</p>
+<% end %>
+</div>

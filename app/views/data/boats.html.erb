@@ -117,12 +117,13 @@ $(document).ready(function() {
               .size(function(d) d.nodeValue)
               .spacing(0)
               .order(null)
-            .node.add(pv.Dot)
+              .node.add(pv.Dot)
               .fillStyle(pv.Colors.category20().by(function(d) d.nodeName))
               .strokeStyle(function() this.fillStyle().darker())
-              .visible(function(d) d.parentNode)  
+              .visible(function(d) d.parentNode)
               .title(function(d) d.nodeName + ": " + format(d.nodeValue) + ' convicts')
-            .anchor("boats-bubble-graph");
+              .anchor("boats-bubble-graph");
+              
            
           vis.render();
       </script>

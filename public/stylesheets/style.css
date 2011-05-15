@@ -83,3 +83,27 @@
 p.notes {
   font-style:italic;
 }
+
+#destinations-page-container {
+  clear:both;
+  position: relative;
+  height: 600px;
+}
+
+#destinations-table-container {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 440px;
+}
+
+#destinations-table-container table {
+  width: 100%;
+}
+
+#destinations-map-container {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 500px;
+}
