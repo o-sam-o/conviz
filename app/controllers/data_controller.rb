@@ -6,12 +6,13 @@ class DataController < ApplicationController
   end
 
   def destinations
-    @destinations = query_to_map("select destination, count(*) as convicts from convicts where destination  is not null group by destination order by destination")
+    @destinations = query_to_map("select destination, destinations.state, count(*) as convicts from convicts left join destinations on destinations.name = convicts.destination where destination  is not null group by destination order by destination")
     @aust_destinations = @destinations.inject({}) do |result, value|
       destination = Destination.find_by_name(value[:destination])
       result["#{destination.current_name}"] = value[:convicts] unless destination.blank?
       result
     end
+    @state_destinations = query_to_map("select destinations.state, count(*) as convicts from convicts inner join destinations on destinations.name = convicts.destination group by destinations.state order by destinations.state")
   end
 
   def departure_dates

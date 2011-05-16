@@ -92,14 +92,14 @@ p.notes {
 #destinations-page-container {
   clear:both;
   position: relative;
-  height: 600px;
+  height: 650px;
 }
 
 #destinations-table-container {
   position: absolute;
-  right: 5px;
-  top: 5px;
-  width: 440px;
+  left: 5px;
+  top: 395px;
+  width: 950px;
 }
 
 #destinations-table-container table {
@@ -111,4 +111,11 @@ p.notes {
   left: 5px;
   top: 5px;
   width: 500px;
+}
+
+#destinations-donut-container {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 440px;
 }

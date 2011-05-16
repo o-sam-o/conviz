@@ -56,9 +56,7 @@ task :insert_convicts => :environment do
         p "#{d[0]}: #{d[1]}"
       end
 
-      # Too slow
       Convict.create!(data)
-      #ActiveRecord::Base.connection.execute "insert into convicts (#{data.keys.join(', ')}) values (#{'?, ' * (data.length - 1)} ?)", data.values
     end
   end
 

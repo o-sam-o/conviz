@@ -29,13 +29,14 @@
 
             var columnDefs = [
                 {key:"destination", label: "Destination", sortable:true, resizeable:true},
+                {key:"state", label: "State", sortable:true, resizeable:true},
                 {key:"convicts", label: "Convicts", formatter: "number", sortable:true, resizeable:true},
             ];
      
             var tableDS = new YAHOO.util.DataSource(tableData);
             tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
             tableDS.responseSchema = {
-                fields: ["destination", "convicts"]
+                fields: ["destination", "state", "convicts"]
             };
 
             var dataTable = new YAHOO.widget.DataTable("data-table",
@@ -83,7 +84,7 @@
       options['region'] = 'AU';
       options['colors'] = [0xFF8747, 0xFFB581, 0xc06000]; //orange colors
       options['dataMode'] = 'markers';
-      options['height'] = 205;
+      options['height'] = 350;
       options['width'] = 490;
 
       var container = document.getElementById('destinations-map');
@@ -91,6 +92,64 @@
       geomap.draw(data, options);
     }
   </script>
+
+  <div id="destinations-donut-container" class="widget">
+    <h3 class="widget-section-title widget-title-graph-icon">Convict Destinations Donut</h3>
+    <div id="destinations-donut">Loading ...</div>
+  </div>
+
+  <script>
+$(document).ready(function() {
+   new Highcharts.Chart({
+      chart: {
+         renderTo: 'destinations-donut',
+         plotBackgroundColor: 'none',
+         plotBorderWidth: 0,
+         plotShadow: false,
+         height: 350,
+         marginBottom: -30,
+         marginTop: -30,
+         spacingTop: 0,
+      },
+      title: {
+         text: null
+         },      
+      credits: {
+        enabled: false
+      },         
+         tooltip: {
+         formatter: function() {
+            return '<b>'+ this.series.name +'</b><br/>'+ 
+               this.point.name +': '+ this.y +' convicts';
+         }
+      },
+       series: [{
+         type: 'pie',
+         name: 'State',
+         size: '45%',
+         innerSize: '20%',
+         data: [
+          <%= raw @state_destinations.collect { |state| "{name: '#{state[:state]}', y: #{state[:convicts]}}" }.join(', ')  %>
+         ],
+         dataLabels: {
+            enabled: false
+         }
+      }, {
+         type: 'pie',
+         name: 'Location',
+         innerSize: '45%',
+         data: [
+         <%= raw @destinations.collect { |state| %|{name: "#{state[:destination]}", y: #{state[:convicts]}}| }.join(', ')  %>
+         ],
+         dataLabels: {
+            enabled: false
+         }
+      }]
+   });
+   
+   
+  });
+    </script>    
 
  <% else %>
   <p>No destinations</p>
