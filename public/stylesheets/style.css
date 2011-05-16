@@ -48,6 +48,11 @@
   background-size: 16px;  
 }
 
+.widget-title-map-icon {
+  background: url(images/map_icon_16.png) left no-repeat; 
+  background-size: 16px;  
+}
+
 #data-table {
   padding-top: 5px;
 }
