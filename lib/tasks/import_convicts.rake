@@ -92,9 +92,8 @@ def clean_destination(destination)
   end
 end
 
-# FIXME this doesnt seem to be working
 def destination_state(destination)
-  @dest_map ||= Destination.all.inject({}) { |result, value| result[value[0]] = value[1]; result }
+  @dest_map ||= Destination.all.inject({}) { |result, destination| result[destination.name] = destination; result }
   @dest_map[destination].try(:state)
 end
 
