@@ -98,7 +98,7 @@ $(document).ready(function() {
     var myOptions = {
       zoom: 5,
       center: myLatlng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.SATELLITE
     }
     var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
@@ -106,14 +106,36 @@ $(document).ready(function() {
 
     <% @counties.each do |county_map| %>
       <% county = County.find_by_name(county_map[:court_county]) %>
-      new google.maps.Marker({
-        position: new google.maps.LatLng(<%= county.latitude %>, <%= county.longitude %>),
-            map: map,
-            title:"<%= county.name %> <%= county_map[:convicts] %> Convicts"
-      });
+      addMarker('<%=  county.name %>', <%= county_map[:convicts] %>, <%= county.latitude %>, <%= county.longitude %>, map);
     <% end %>
 
   });
+
+  var currentlyDisplayedInfoWindow = null;
+
+  function addMarker(countyName, convicts, lat, lng, map) {
+      var marker  = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lng),
+            map: map,
+            title:countyName + " " + convicts + " Convicts"
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+        content: "<strong>" + countyName + "</strong><br/> " + convicts + ' Convicts.<br/><a href="/convicts?court_county=' + countyName + '">See the convicts</a>'
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        if(currentlyDisplayedInfoWindow){
+          currentlyDisplayedInfoWindow.close();
+        }
+        infoWindow.open(map,marker);
+        currentlyDisplayedInfoWindow = infoWindow;
+      });
+
+      google.maps.event.addListener(marker, 'dragstart', function(){
+        infoWindow.close();
+      });
+  }
 
 </script>
 
