@@ -11,9 +11,7 @@
   
   <link href='http://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css'> 
 
-  <!-- Dependencies -->
   <script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
-  <!-- Source file -->
   <script src="http://yui.yahooapis.com/2.9.0/build/logger/logger-min.js"></script>
 
   <%= csrf_meta_tag %>
@@ -33,10 +31,13 @@
           <div id="navigation" class="two-of-two">
                       <ul class="header-nav">
               <li class="first"><a href="/" title="Home">Home</a></li>
+              <li><a href="/convicts" title="Convicts">Convicts</a></li>
+              <li><a href="/data/boats" title="Boats">Boats</a></li>
+              <li><a href="/data/destinations" title="Destinations">Destinations</a></li>
+              <li><a href="/data/departure_dates" title="Departure Dates">Dates</a></li>
+              <li><a href="/data/court_counties" title="Court Counties">Counties</a></li>
               
               <li class="page_item page-item-2"><a href="/about" title="About">About</a></li>
-              
-              <li><a href="/about/credits" title="Credits">Credits</a></li>
             </ul>
           </div> <!-- #navigation .two-of-two -->
         </div> <!-- #header-top .row -->
@@ -46,9 +47,9 @@
               <a href="/" title="Home"><img src="/images/logo.png" alt="ConViz"></a>
           </div> <!-- #logo .one-of-two -->
           
-          <div id="rotator" class="two-of-two">
+          <div id="rotator">
               <%= form_tag(convicts_path, :method => "get", :id => 'convict-search-form') do %>
-                <%= label_tag "q", "Convict Search" %> 
+                <%= label_tag "q", "Convict Search:" %> 
                 <input type="search" name="q" value="<%= params[:q] %>" />
                 <%= submit_tag "Search", :class => "action-button" %>
               <% end %>
@@ -75,12 +76,11 @@
     <div class="section">
       <footer class="row">
         <div id="footer-left" class="one-of-two">
-                  <h3>Copyright 2011 Transmit - All Rights Reserved</h3>
           <p>The "Transmit" <a href="http://www.wordpress.org/" title="WordPress.org">WordPress</a> Theme by <a href="http://www.press75.com/" title="Press75.com">Press75.com</a></p>
                 </div>
         
         <div id="footer-right" class="two-of-two">
-                  <p><a class="twitter-link" href="http://twitter.com/press75" title="Twitter.com">Follow Press75.com on Twitter</a></p>
+                  <p>Developed by <a href="http://o-sam-o.github.com/">Sam Cavenagh</a></p>
                 </div>
       </footer> <!-- footer .row -->
     </div> <!-- .section -->

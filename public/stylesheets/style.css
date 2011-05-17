@@ -1,7 +1,3 @@
-#convict-search-form {
-  margin: 65px 0px 0px 205px;
-}
-
 #convict-search-form label {
   color: #CCC;
 }
@@ -155,4 +151,29 @@ p.notes {
 .overclear {
 	width: 100%;
 	overflow: hidden;
+}
+
+.row {
+  position: relative;
+}
+
+#rotator {
+  position: absolute;
+  right: 10px;
+  bottom: 0px;
+}
+
+#rotator input, select {
+  vertical-align:text-top;
+}
+
+.action-button {
+	text-shadow: 0 1px 0 #fff;
+  font-weight: bold;
+	background: #eef0f2 url(images/feature-li-bg.png) repeat-x bottom left;
+	border: 1px solid #aaa;
+	-moz-border-radius: 16px;
+	-webkit-border-radius: 16px;
+  height: 20px;
+  padding: 1px 20px 5px 20px;
 }
