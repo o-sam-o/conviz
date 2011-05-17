@@ -34,6 +34,7 @@ class DataController < ApplicationController
 
   def court_counties
     @counties = query_to_map("select court_county, count(*) as convicts from convicts where court_county is not null group by court_county order by court_county")
+    @top_counties = query_to_map('select court_county, count(*) as convicts from convicts where court_county is not null group by court_county order by count(*) desc limit 15')
   end
 
 private

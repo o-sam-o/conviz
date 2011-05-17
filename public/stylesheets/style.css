@@ -119,3 +119,40 @@ p.notes {
   top: 5px;
   width: 440px;
 }
+
+#court-counties-page-container {
+  clear:both;
+  position: relative;
+  height: 2325px;
+}
+
+#counties-map-container {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 320px;
+}
+
+#top-conviction-container {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  height: 490px;
+  width: 610px;
+}
+
+#courty-table-container {
+  position: absolute;
+  left: 5px;
+  top: 510px;
+  width: 950px;
+}
+
+#courty-table-container table {
+  width: 100%;
+}
+
+.overclear {
+	width: 100%;
+	overflow: hidden;
+}

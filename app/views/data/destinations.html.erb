@@ -120,7 +120,7 @@ $(document).ready(function() {
          tooltip: {
          formatter: function() {
             return '<b>'+ this.series.name +'</b><br/>'+ 
-               this.point.name +': '+ this.y +' convicts';
+               this.point.name +': '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
          }
       },
        series: [{
