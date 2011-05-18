@@ -154,13 +154,21 @@ p.notes {
   height: 1200px;
 }
 
+#home-page-container #year-graph-container {
+  width: 620px;
+}
+
 #home-page-container #destinations-map-container {
-  top: 400px;
+  top: 485px;
   width: 470px;
 }
 
 #home-page-container #boats-bubble-graph-container {
-  top: 400px;
+  top: 485px;
+}
+
+#home-page-container #counties-map-container {
+  top: 0
 }
 
 .overclear {

@@ -9,7 +9,7 @@ $(document).ready(function() {
       chart: {
          renderTo: 'year-graph',
          defaultSeriesType: 'area',
-         height: 350
+         height: <%= graph_height ||= 350 %>
       },
       title: {
          text: null

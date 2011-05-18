@@ -17,7 +17,9 @@
 <% end %>
 
 <div id="home-page-container">
-  <%= render :partial => '/data/departure_year_graph' %>
+  <%= render :partial => '/data/departure_year_graph', :locals => { :graph_height => 460 } %>
+
+  <%= render :partial => '/data/conviction_locations_map' %>
 
   <%= render :partial => '/data/top_boats_chart' %>
 

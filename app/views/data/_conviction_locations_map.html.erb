@@ -1,0 +1,53 @@
+  <div id="counties-map-container" class="widget">
+    <h3 class="widget-section-title widget-title-map-icon">Conviction Locations Map</h3>
+    <div id="map_canvas" style="width: 320px; height: 450px">Loading ...</div> 
+  </div>
+
+<script>
+  
+  $(document).ready(function() {
+    var myLatlng = new google.maps.LatLng(54.55, -4.1);
+    var myOptions = {
+      zoom: 5,
+      center: myLatlng,
+      mapTypeId: google.maps.MapTypeId.SATELLITE
+    }
+    var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+    var geocoder = new google.maps.Geocoder();
+
+    <% @counties.each do |county_map| %>
+      <% county = County.find_by_name(county_map[:court_county]) %>
+      addMarker('<%=  county.name %>', <%= county_map[:convicts] %>, <%= county.latitude %>, <%= county.longitude %>, map);
+    <% end %>
+
+  });
+
+  var currentlyDisplayedInfoWindow = null;
+
+  function addMarker(countyName, convicts, lat, lng, map) {
+      var marker  = new google.maps.Marker({
+        position: new google.maps.LatLng(lat, lng),
+            map: map,
+            title:countyName + " " + convicts + " Convicts"
+      });
+
+      var infoWindow = new google.maps.InfoWindow({
+        content: "<strong>" + countyName + "</strong><br/> " + convicts + ' Convicts.<br/><a href="/convicts?court_county=' + countyName + '">See the convicts</a>'
+      });
+
+      google.maps.event.addListener(marker, 'click', function() {
+        if(currentlyDisplayedInfoWindow){
+          currentlyDisplayedInfoWindow.close();
+        }
+        infoWindow.open(map,marker);
+        currentlyDisplayedInfoWindow = infoWindow;
+      });
+
+      google.maps.event.addListener(marker, 'dragstart', function(){
+        infoWindow.close();
+      });
+  }
+
+</script>
+

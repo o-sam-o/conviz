@@ -10,7 +10,7 @@
 <% content_for :page_header do %>
   <h2 class="page-title">
     <% if params[:boat] %>
-      Convicts on boat <%= params[:boat] %>
+      Convicts transported on the <%= params[:boat] %>
     <% elsif params[:destination] %>
       Convicts bound for <%= params[:destination] %>
     <% elsif params[:departure_year] %>
@@ -18,7 +18,7 @@
     <% elsif params[:court_county] %>
       Convicts convicted near <%= params[:court_county] %>
     <% elsif params[:q].present? %>
-      Searching Convicts for <%= params[:q] %>
+      Searching Convicts for: <%= params[:q].titleize %>
     <% else %>
       Convict Lists
     <% end %>
