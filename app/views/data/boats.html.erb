@@ -83,52 +83,7 @@ $(document).ready(function() {
 
     </script>
 
-    <div id="boats-bubble-graph-container" class="widget">
-      <h3 class="widget-section-title widget-title-graph-icon">Top 100 Boats</h3>
-      <div id="boats-bubble-graph"> </div>
-
-      <script type="text/javascript+protovis">
-          var convictBoats = {
-            <%= raw @top_boats.collect { |m| "'#{m[:boat]}': #{m[:convicts]}" }.join(', ') %>
-          };
-
-
-          /* Copied from source, ideally i would like to get rid of this */
-          var classes = pv.nodes(pv.flatten(convictBoats).leaf(Number).array());
-          classes.slice(1).forEach(function(d) {
-            d.nodeName = d.nodeValue.keys.join(".");
-            var i = d.nodeName.lastIndexOf(".");
-            d.className = d.nodeName.substring(i + 1);
-            d.packageName = d.nodeName.substring(0, i);
-            d.nodeValue = d.nodeValue.value;
-          });
-           
-          /* For pretty number formatting. */
-          var format = pv.Format.number();
-           
-          var vis = new pv.Panel()
-              .width(420)
-              .height(380);
-           
-          vis.add(pv.Layout.Pack)
-              .top(-10)  
-              .bottom(-20)  
-              .nodes(classes)
-              .size(function(d) d.nodeValue)
-              .spacing(0)
-              .order(null)
-              .node.add(pv.Dot)
-              .fillStyle(pv.Colors.category20().by(function(d) d.nodeName))
-              .strokeStyle(function() this.fillStyle().darker())
-              .visible(function(d) d.parentNode)
-              .title(function(d) d.nodeName + ": " + format(d.nodeValue) + ' convicts')
-              .anchor("boats-bubble-graph");
-              
-           
-          vis.render();
-      </script>
-      <p class="notes">Hover mouse to see boat name and number of convicts</p>
-    </div>
+    <%= render :partial => 'top_boats_chart' %>
 
   </div>
 

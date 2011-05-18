@@ -1,0 +1,69 @@
+<div id="year-graph-container" class="widget">
+  <h3 class="widget-section-title widget-title-graph-icon">Convicts vs Year of Departure</h3>
+  <div id="year-graph"> </div>
+</div>
+
+<script>
+$(document).ready(function() {
+   new Highcharts.Chart({
+      chart: {
+         renderTo: 'year-graph',
+         defaultSeriesType: 'area',
+         height: 350
+      },
+      title: {
+         text: null
+      },
+      credits: {
+        enabled: false
+      },
+      xAxis: {
+        allowDecimals: false,
+        labels: {
+          formatter: function() {
+            return "" + this.value;
+          },
+         title: {
+            text: 'Departure Year'
+          }          
+        }
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'Convict Count'
+          }
+      },
+      legend: {
+         layout: 'vertical',
+         backgroundColor: '#FFFFFF',
+         align: 'left',
+         verticalAlign: 'top',
+         x: 100,
+         y: 70,
+         floating: true,
+         shadow: true
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+               this.y +' convicts departing in '+ this.x;
+         }
+      },
+      plotOptions: {
+         area: {
+           pointStart: <%= @years.first[:departure_year] %>,
+            marker: {
+              enabled: false
+            }
+        }
+      },
+      series: [{
+         name: 'Year',
+         data: [<%= (@years.first[:departure_year]..@years.last[:departure_year]).collect { |year| @years_map[year] || 0 }.join(', ') %>]
+      }]
+   });
+   
+   
+});
+</script>

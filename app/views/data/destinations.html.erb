@@ -60,38 +60,7 @@
     });
   </script>
 
-  <div id="destinations-map-container" class="widget">
-    <h3 class="widget-section-title widget-title-map-icon">Convict Destinations Map</h3>
-    <div id="destinations-map">Loading ...</div>
-  </div>
-
-  <script type='text/javascript'>
-   google.load('visualization', '1', {'packages': ['geomap']});
-   google.setOnLoadCallback(drawMap);
-
-    function drawMap() {
-      var data = new google.visualization.DataTable();
-      data.addRows(<%= @aust_destinations.size %>);
-      data.addColumn('string', 'City');
-      data.addColumn('number', 'Convicts');
-
-      <% @aust_destinations.each_with_index do |value, index| %>
-        data.setValue(<%= index %>, 0, '<%= value[0] %>');
-        data.setValue(<%= index %>, 1, <%= value[1] %>);
-      <% end %>
-
-      var options = {};
-      options['region'] = 'AU';
-      options['colors'] = [0xFF8747, 0xFFB581, 0xc06000]; //orange colors
-      options['dataMode'] = 'markers';
-      options['height'] = 350;
-      options['width'] = 490;
-
-      var container = document.getElementById('destinations-map');
-      var geomap = new google.visualization.GeoMap(container);
-      geomap.draw(data, options);
-    }
-  </script>
+  <%= render :partial => 'destinations_map' %>
 
   <div id="destinations-donut-container" class="widget">
     <h3 class="widget-section-title widget-title-graph-icon">Convict Destinations Donut</h3>

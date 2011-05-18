@@ -148,6 +148,21 @@ p.notes {
   width: 100%;
 }
 
+#home-page-container {
+  clear: both;
+  position: relative;
+  height: 1200px;
+}
+
+#home-page-container #destinations-map-container {
+  top: 400px;
+  width: 470px;
+}
+
+#home-page-container #boats-bubble-graph-container {
+  top: 400px;
+}
+
 .overclear {
 	width: 100%;
 	overflow: hidden;
