@@ -70,7 +70,9 @@ def county_finder(court)
   end
   @aliased_countries ||= County.where('alias is not null').collect { |c| c }
   @aliased_countries.each do |county|
-    return county.name if court =~ /#{county.alias}/i
+    county.alias.split(';').each do |c_alias|
+      return county.name if court =~ /#{c_alias}/i
+    end
   end
   return nil
 end
