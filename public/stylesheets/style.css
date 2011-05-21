@@ -192,7 +192,7 @@ p.notes {
 
 #home-page-container #year-graph-container {
   width: 620px;
-  top: 650px;
+  top: 655px;
 }
 
 #home-page-container #destinations-map-container {
@@ -205,7 +205,7 @@ p.notes {
 }
 
 #home-page-container #counties-map-container {
-  top: 650px;
+  top: 655px;
 }
 
 #site-map-container {
@@ -261,14 +261,15 @@ p.notes {
 #search-convicts-link, #departure-dates-link, #boats-link, #court-counties-link, #destinations-link {
   display: block;
   float: left;
+  margin-top: 9px;
   padding: 135px 10px 5px;
-  width: 130px;
+  width: 140px;
   text-align: center;
   font-weight: bold;
 }
 
 #search-convicts-link {
-  margin-left: 90px;
+  margin-left: 75px;
   background: url(images/convicts_128.png) top center no-repeat; 
 }
 
