@@ -10,14 +10,14 @@
 
 <% content_for :page_header do %>
   <div id="text-3" class="widget widget_text">			
-    <div class="textwidget">
-      TODO describe Conviz here
+    <div id="home-intro-text" class="textwidget">
+      <%= render :partial => 'overview_text' %> 
     </div>
 	</div>
 <% end %>
 
 <div id="home-page-container">
-  <%= render :partial => '/data/departure_year_graph', :locals => { :graph_height => 460 } %>
+  <%= render :partial => '/data/departure_year_graph', :locals => { :graph_height => 360 } %>
 
   <%= render :partial => '/data/conviction_locations_map' %>
 

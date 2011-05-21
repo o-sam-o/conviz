@@ -21,13 +21,42 @@
   clear: both;
 }
 
-#year-graph-container, #month-graph-container, #decades-graph-container{
-  float: left;
+#departure-date-page-container {
+  clear:both;
+  position: relative;
+  height: 1800px;
+}
+
+#year-graph-container {
+  position: absolute;
+  left: 5px;
+  top: 5px;  
+  width: 700px;
+}
+
+#month-graph-container {
+  position: absolute;
+  left: 5px;
+  top: 400px;  
+  width: 700px;
+} 
+ 
+#decades-graph-container {
+  position: absolute;
+  left: 5px;
+  top: 850px;  
   width: 700px;
 }
 
 #year-table-container {
-  float: right;
+  position: absolute;
+  right: 5px;
+  top: 5px;  
+  width: 230px;
+}
+
+#year-table-container table {
+  width: 100%;
 }
 
 .widget-section-title {
@@ -48,6 +77,13 @@
   background: url(images/map_icon_16.png) left no-repeat; 
   background-size: 16px;  
 }
+
+.widget-title-text-icon {
+  background: url(images/text_icon_16.png) left no-repeat; 
+  background-size: 16px;  
+}
+
+
 
 #data-table {
   padding-top: 5px;
@@ -156,19 +192,20 @@ p.notes {
 
 #home-page-container #year-graph-container {
   width: 620px;
+  top: 450px;
 }
 
 #home-page-container #destinations-map-container {
-  top: 485px;
+  top: 5px;
   width: 470px;
 }
 
 #home-page-container #boats-bubble-graph-container {
-  top: 485px;
+  top: 5px;
 }
 
 #home-page-container #counties-map-container {
-  top: 0
+  top: 450px;
 }
 
 .overclear {
@@ -199,4 +236,12 @@ p.notes {
 	-webkit-border-radius: 16px;
   height: 20px;
   padding: 1px 20px 5px 20px;
+}
+
+#home-intro-text {
+  text-align: justify;
+}
+
+#about-page-container {
+  clear: both;
 }
