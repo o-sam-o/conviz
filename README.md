@@ -48,6 +48,10 @@ Icons:
 http://www.customicondesign.com/
 http://p.yusukekamiyamane.com/
 http://led24.de/iconset/
+http://www.iconshock.com/
+http://pixelpressicons.com/index_old.html
+http://www.kde-look.org/content/show.php/Dark-Glass+reviewed?content=67902
+http://ztreasureisle.wikia.com/wiki/File:JudgeItems_Gavel-icon.png
 
 Convicts: Search Icon : http://www.iconfinder.com/icondetails/27464/128/binoculars_find_search_zoom_icon
 Boats: Tall Ship : http://pixelpressicons.com/index_old.html

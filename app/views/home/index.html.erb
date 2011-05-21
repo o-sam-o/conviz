@@ -21,6 +21,15 @@
 
   <%= render :partial => '/data/conviction_locations_map' %>
 
+  <div id="site-map-container" class="widget">
+    <h3 class="widget-section-title widget-title-text-icon">Explore Convict Records</h3>
+    <%= link_to "Search Convicts", convicts_path, :id => 'search-convicts-link' %>
+    <%= link_to "Departure Dates", {:controller => :data, :action => :departure_dates}, :id => 'departure-dates-link' %>
+    <%= link_to "Boats", {:controller => :data, :action => :boats}, :id => 'boats-link' %>
+    <%= link_to "Conviction County", {:controller => :data, :action => :court_counties}, :id => 'court-counties-link' %>
+    <%= link_to "Destinations", {:controller => :data, :action => :destinations}, :id => 'destinations-link' %>
+  </div>
+
   <%= render :partial => '/data/top_boats_chart' %>
 
   <%= render :partial => '/data/destinations_map', :locals => { :map_width => 470, :map_height => 400 }  %>

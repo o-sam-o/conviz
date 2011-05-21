@@ -192,7 +192,7 @@ p.notes {
 
 #home-page-container #year-graph-container {
   width: 620px;
-  top: 450px;
+  top: 650px;
 }
 
 #home-page-container #destinations-map-container {
@@ -205,7 +205,14 @@ p.notes {
 }
 
 #home-page-container #counties-map-container {
+  top: 650px;
+}
+
+#site-map-container {
+  position: absolute;
   top: 450px;
+  left: 5px;
+  width: 100%;
 }
 
 .overclear {
@@ -238,10 +245,45 @@ p.notes {
   padding: 1px 20px 5px 20px;
 }
 
+.action-button:hover {
+	border: 1px solid #c9c9c9;
+	background: #f3f5f7 url(images/feature-li-bg-hover.png) repeat-x bottom left;
+}
+
 #home-intro-text {
   text-align: justify;
 }
 
 #about-page-container {
   clear: both;
+}
+
+#search-convicts-link, #departure-dates-link, #boats-link, #court-counties-link, #destinations-link {
+  display: block;
+  float: left;
+  padding: 135px 10px 5px;
+  width: 130px;
+  text-align: center;
+  font-weight: bold;
+}
+
+#search-convicts-link {
+  margin-left: 90px;
+  background: url(images/convicts_128.png) top center no-repeat; 
+}
+
+#departure-dates-link{
+  background: url(images/departure_dates_128.png) top center no-repeat; 
+}
+
+#boats-link {
+  background: url(images/boats_128.jpg) top center no-repeat; 
+}
+
+#court-counties-link {
+  background: url(images/conviction_counties_128.png) top center no-repeat; 
+}
+
+#destinations-link {
+  background: url(images/destinations_128.png) top center no-repeat; 
 }
