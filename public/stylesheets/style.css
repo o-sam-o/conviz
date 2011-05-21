@@ -117,6 +117,10 @@
   top 5px;
 }
 
+#boats-bubble-graph-container .notes {
+  text-align: center;
+}
+
 p.notes {
   font-style:italic;
 }
@@ -287,4 +291,8 @@ p.notes {
 
 #destinations-link {
   background: url(images/destinations_128.png) top center no-repeat; 
+}
+
+.about-container {
+  margin-bottom: 20px;
 }
