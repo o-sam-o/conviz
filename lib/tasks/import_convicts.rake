@@ -15,12 +15,15 @@ task :insert_convicts => :environment do
       first_name = full_name.split(',')[0].strip
       last_name = full_name.split(',')[1..-1].join(',').strip if full_name.split(',').length > 1
 
+      alias_name = values[8]
+      alias_name = alias_name.gsub(/\(alias\)/i, '').strip if alias_name
+      # TODO values[9] can also contain an alias name
+
       court_and_term = values[1]
       if court_and_term =~ /Convicted at (.*) for a term/
         court = $1
       end
 
-      # TODO add better cleaning of term
       if court_and_term =~ /for a term of (.*)/
         term = $1
         term = 'life' if term =~ /life/
@@ -37,6 +40,7 @@ task :insert_convicts => :environment do
         name: full_name,
         first_name: first_name,
         last_name: last_name,
+        alias_name: alias_name,
         description: values[0],
         boat: clean_boat(values[2]),
         departure_date: departure_date,
