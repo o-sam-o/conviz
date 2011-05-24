@@ -155,6 +155,8 @@ namespace :seed do
     params[:latitude] = geo_result.lat.to_s
     params[:longitude] = geo_result.lng.to_s
     County.create!(params)
+    # Try to fix problems with run on webbynode
+    sleep 1
   end
 
   def insert_destination(params)
