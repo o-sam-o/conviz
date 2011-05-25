@@ -3,6 +3,7 @@
   <div id="boats-bubble-graph"> </div>
 
   <script type="text/javascript+protovis">
+$(document).ready(function() {
     var convictBoats = {
       <%= raw @top_boats.collect { |m| "'#{m[:boat]}': #{m[:convicts]}" }.join(', ') %>
     };
@@ -41,6 +42,7 @@ var format = pv.Format.number();
 
 
   vis.render();
+});
   </script>
   <p class="notes">Hover mouse to see boat name and number of convicts</p>
 </div>
