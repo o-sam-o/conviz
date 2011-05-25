@@ -75,7 +75,7 @@ $(document).ready(function() {
       },
       series: [{
          name: 'Convicts',
-         data: <%= raw @top_counties.collect { |m| m[:convicts] }.to_json %>
+         data: <%= raw @top_counties.collect { |m| m[:convicts].to_i }.to_json %>
       }]
    });
    
