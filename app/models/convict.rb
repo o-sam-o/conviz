@@ -9,7 +9,7 @@ class Convict < ActiveRecord::Base
   end
 
   def self.destination_stats
-    query_to_map("select destination, destinations.state, count(*) as convicts from convicts left join destinations on destinations.name = convicts.destination where destination  is not null group by destination order by destination")
+    query_to_map("select destination, destinations.state, count(*) as convicts from convicts left join destinations on destinations.name = convicts.destination where destination is not null group by destination, destinations.state order by destination")
   end
 
   def self.aust_destination_stats
