@@ -36,13 +36,58 @@
   <div id="convicts-table">Loading ...</div>
 
   <script>
+
+var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
+    var oDate = oData, sMonth;
+    switch(oDate.getMonth()) {
+        case 0:
+            sMonth = "Jan";
+            break;
+        case 1:
+            sMonth = "Feb";
+            break;
+        case 2:
+            sMonth = "Mar";
+            break;
+        case 3:
+            sMonth = "Apr";
+            break;
+        case 4:
+            sMonth = "May";
+            break;
+        case 5:
+            sMonth = "Jun";
+            break;
+        case 6:
+            sMonth = "Jul";
+            break;
+        case 7:
+            sMonth = "Aug";
+            break;
+        case 8:
+            sMonth = "Sep";
+            break;
+        case 9:
+            sMonth = "Oct";
+            break;
+        case 10:
+            sMonth = "Nov";
+            break;
+        case 11:
+            sMonth = "Dec";
+            break;
+    }
+    elCell.innerHTML = oDate.getDate()  + " " + sMonth + " " + oDate.getFullYear();
+};
+
+
     YAHOO.util.Event.addListener(window, "load", function() {
             var tableData = <%= raw @convicts.to_json %>;
 
             var columnDefs = [
                 {key:"name", label: "Name", sortable:true, resizeable:true},
                 {key:"boat", label: "Boat", sortable:true, resizeable:true},
-                {key:"departure_date", label: "Departure Date", formatter:YAHOO.widget.DataTable.formatDate, sortable:true, resizeable:true},
+                {key:"departure_date", label: "Departure Date", formatter:customDateFormatter, sortable:true, resizeable:true},
                 {key:"court", label: "Court", sortable:true, resizeable:true},
                 {key:"destination", label: "Destination", sortable:true, resizeable:true},
                 {key:"term", label: "Term", sortable:true, resizeable:true}
@@ -51,7 +96,15 @@
             var tableDS = new YAHOO.util.DataSource(tableData);
             tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
             tableDS.responseSchema = {
-                fields: ["id", "name","boat","departure_date","court","destination", "term"]
+              fields: [
+                 {key:"id"}, 
+                 {key:"name"},
+                 {key:"boat"},
+                 {key:"departure_date", parser:'date'},
+                 {key:"court"},
+                 {key:"destination"}, 
+                 {key:"term"}
+              ]
             };
 
             var dataTable = new YAHOO.widget.DataTable("convicts-table",
