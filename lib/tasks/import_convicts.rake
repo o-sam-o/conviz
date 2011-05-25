@@ -1,6 +1,7 @@
 desc 'inserts convicts into database'
 task :insert_convicts => :environment do
   Convict.delete_all
+  # Download convict records from : http://data.gov.au/dataset/british-convict-transportation-registers/
   File.open("#{Rails.root}/lib/Convict_records.txt", "r") do |infile|
     while (line = infile.gets)
       puts line
