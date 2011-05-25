@@ -76,7 +76,7 @@ $(document).ready(function() {
       },
       series: [{
         name: 'Convict Boats',
-        data: <%= raw @top_boats[0..8].collect { |m| m[:convicts] }.to_json %>
+        data: <%= raw @top_boats[0..8].collect { |m| m[:convicts].to_i }.to_json %>
       }]
     });
    });
