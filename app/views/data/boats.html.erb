@@ -99,8 +99,8 @@ $(document).ready(function() {
 
             var columnDefs = [
                 {key:"boat", label: "Boat", sortable:true, resizeable:true},
-                {key:"convicts", label: "Convicts", sortable:true, resizeable:true},
-                {key:"voyage_count", label: "Voyages", sortable:true, resizeable:true},
+                {key:"convicts", label: "Convicts", formatter: "number", sortable:true, resizeable:true},
+                {key:"voyage_count", label: "Voyages", formatter: "number", sortable:true, resizeable:true},
             ];
      
             var tableDS = new YAHOO.util.DataSource(tableData);
