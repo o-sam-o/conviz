@@ -21,33 +21,26 @@
 </head>
 <body class="yui3-skin-sam  yui-skin-sam">
 
-  <!--[if IE]>
-    <script type="text/javascript" 
-     src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
-
-    <style>
-     .chromeFrameInstallDefaultStyle {
-       width: 100%; /* default is 800px */
-       border: 5px solid blue;
-     }
-    </style>
-
-    <div id="prompt">
-      <!-- if IE without GCF, prompt goes here -->
-    </div>
- 
-    <script>
-     // The conditional ensures that this code will only execute in IE,
-     // Therefore we can use the IE-specific attachEvent without worry
-     window.attachEvent("onload", function() {
-       CFInstall.check({
-         mode: "overlay", // the default
-         node: "prompt"
-       });
-     });
-    </script>
-  <![endif]-->
-
+<!--[if lte IE 9]>
+<script>
+(function($){
+   $(function(){
+          var message = "This site requires a modern browser such as <a href="http://www.google.com/chrome/">Chrome</a>, <a href='http://firefox.com'>Firefox</a> or Internet Explorer 9.",
+          div = $('<div id="ie-warning"></div>').html(message).css({
+                   'height': '50px',
+                   'line-height': '50px',
+                   'background-color':'#f9db17',
+                   'text-align':'center',
+                   'font-family':'Arial, Helvetica, sans-serif',
+                   'font-size':'12pt',
+                   'font-weight':'bold',
+                   'color':'black'
+                }).hide().find('a').css({color:'#333'}).end();
+      div.prependTo(document.body).slideDown(500);
+    });
+})(jQuery);
+</script>
+<![endif]-->
 
   <div id="header" class="row">
     <div class="section">
