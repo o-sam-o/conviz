@@ -26,11 +26,16 @@ class Convict < ActiveRecord::Base
 
   def self.year_stats
     year_stats = query_to_map("select departure_year, count(*) as convicts from convicts where departure_year is not null group by departure_year order by departure_year")
-    year_stats_map = year_stats.inject({}) do |result, map| 
-      result[map[:departure_year]] = map[:convicts]
-      result
+    return year_stats, year_state_stats
+  end
+
+  def self.year_state_stats
+    raw_stats = query_to_map("select departure_year, destination_state, count(*) as convicts from convicts where departure_year is not null group by departure_year, destination_state order by departure_year")
+    stats = { :NSW => {}, :VIC => {}, :OTHER => {}, :WA => {}, :TAS => {}, :QLD => {} }.with_indifferent_access
+    raw_stats.each do |map|
+      stats[map[:destination_state] || :OTHER][map[:departure_year]] = map[:convicts].to_i
     end
-    return year_stats, year_stats_map
+    return stats
   end
 
   def self.month_stats

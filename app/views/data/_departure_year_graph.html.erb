@@ -1,5 +1,5 @@
 <div id="year-graph-container" class="widget">
-  <h3 class="widget-section-title widget-title-graph-icon">Convicts vs Year of Departure</h3>
+  <h3 class="widget-section-title widget-title-graph-icon">Convicts vs Year of Departure vs Destination State</h3>
   <div id="year-graph"> </div>
 </div>
 
@@ -52,16 +52,21 @@ $(document).ready(function() {
       },
       plotOptions: {
          area: {
+           stacking: 'normal',
            pointStart: <%= @years.first[:departure_year] %>,
             marker: {
               enabled: false
             }
         }
       },
-      series: [{
-         name: 'Year',
-         data: [<%= (@years.first[:departure_year]..@years.last[:departure_year]).collect { |year| @years_map[year] || 0 }.join(', ') %>]
-      }]
+      series: [
+        <% ['NSW', 'TAS', 'QLD', 'WA', 'VIC', 'OTHER'].each do |state| %>
+        {
+          name: '<%= state %>',
+          data: [<%= (@years.first[:departure_year]..@years.last[:departure_year]).collect { |year| @years_map[state][year] || 0 }.join(', ') %>]
+        },
+        <% end %>
+      ]
    });
    
    
