@@ -26,10 +26,6 @@ html {
 overflow-y: scroll; 
 } 
 
-a:hover, a:active { 
-outline: none; 
-}
-
 a, a:active, a:visited {
 color: #444444; 
 }

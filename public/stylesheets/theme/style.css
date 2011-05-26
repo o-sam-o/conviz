@@ -94,6 +94,7 @@ padding: 9px 0 0 0;
 
 #header-top a {
 color: #CCCCCC;
+text-decoration: none;
 }
 
 #header-top a:hover {
@@ -278,6 +279,7 @@ color: #999999;
 #footer-left p a {
 border-bottom: 1px dotted #999999;
 color: #999999;
+text-decoration: none;
 }
 
 #footer-right {
