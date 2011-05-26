@@ -36,6 +36,17 @@
   <div id="convicts-table">Loading ...</div>
 
   <script>
+//From http://obvcode.blogspot.com/2007/11/easiest-way-to-check-ie-version-with.html
+var Browser = {
+  Version: function() {
+    var version = 999; // we assume a sane browser
+    if (navigator.appVersion.indexOf("MSIE") != -1)
+      // bah, IE again, lets downgrade version number
+      version = parseFloat(navigator.appVersion.split("MSIE")[1]);
+    return version;
+  }
+}
+
 
 var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
     var oDate = oData, sMonth;
@@ -77,7 +88,7 @@ var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
             sMonth = "Dec";
             break;
     }
-    elCell.innerHTML = oDate;//oDate.getDate()  + " " + sMonth + " " + oDate.getFullYear();
+    elCell.innerHTML = oDate.getDate()  + " " + sMonth + " " + oDate.getFullYear();
 };
 
 
@@ -92,7 +103,12 @@ var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
                 {key:"destination", label: "Destination", sortable:true, resizeable:true},
                 {key:"term", label: "Term", sortable:true, resizeable:true}
             ];
-     
+
+            //Hack for IE so date looks ok .... this makes me sad :(
+            if (Browser.Version() < 9) {
+              delete columnDefs[2]['formatter'];
+            }
+
             var tableDS = new YAHOO.util.DataSource(tableData);
             tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
             tableDS.responseSchema = {
@@ -106,6 +122,11 @@ var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
                  {key:"term"}
               ]
             };
+
+            //Hack for IE so date looks ok .... this makes me sad :(
+            if (Browser.Version() < 9) {
+              delete tableDS.responseSchema.fields[3]['parser'];
+            }
 
             var dataTable = new YAHOO.widget.DataTable("convicts-table",
             columnDefs, tableDS, {sortedBy : {key:"<%= params[:sort] || 'name' %>", dir: <%= params[:direction] == 'desc' ? 'YAHOO.widget.DataTable.CLASS_DESC' : 'YAHOO.widget.DataTable.CLASS_ASC' %>}});
