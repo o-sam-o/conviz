@@ -3,7 +3,7 @@ class ConvictsController < ApplicationController
   def index
     @convicts = Convict.order("#{params[:sort] || 'name'} #{params[:direction] || 'ASC'}")
     unless params[:q].blank?
-      @convicts = @convicts.where('lower(name) like ?', "%#{params[:q]}%") 
+      @convicts = @convicts.where('lower(name) like ?', "%#{params[:q].downcase}%") 
     end
 
     unless params[:boat].blank?
