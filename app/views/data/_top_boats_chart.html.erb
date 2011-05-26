@@ -13,6 +13,8 @@ $(document).ready(function() {
       <%= raw @top_boats.collect { |m| "'#{m[:boat]}': #{m[:convicts]}" }.join(', ') %>
     };
 
+    //Dont show dialog on error
+    pv.error=function(b){};
 
 /* Copied from source, ideally i would like to get rid of this */
 var classes = pv.nodes(pv.flatten(convictBoats).leaf(Number).array());
