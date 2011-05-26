@@ -2,6 +2,10 @@
   color: #CCC;
 }
 
+#convict-search-form input[type=search] {
+  height: 12px;
+}
+
 #convicts-table table {
   width: 100%;
 }
