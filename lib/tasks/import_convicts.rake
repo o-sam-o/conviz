@@ -27,7 +27,7 @@ task :insert_convicts => :environment do
 
       if court_and_term =~ /for a term of (.*)/
         term = $1
-        term = 'life' if term =~ /life/
+        term = 'Life' if term =~ /life/
         term = $1 if term =~ /(\d+) year/
         # Handle 2 specific corner cases
         term = '7' if term =~ /seven years/
