@@ -42,7 +42,7 @@ $(document).ready(function() {
          categories: <%= raw @top_counties.collect { |m| m[:court_county] }.to_json %>,
          title: {
             text: 'Counties'
-         },
+         }
       },
       yAxis: {
          min: 0,
