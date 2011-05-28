@@ -1,13 +1,12 @@
 desc 'remove all cache entries'
 task :sweep_cache => :environment do
-  ActionController::Base::expire_page('/')
-  ActionController::Base::expire_page('/home/about')
+  `rm #{Rails.root}/public/index.html`
+  `rm #{Rails.root}/public/home/about.html`
 
-  ActionController::Base::expire_page('/data/boats')
-  ActionController::Base::expire_page('/data/destinations')
-  ActionController::Base::expire_page('/data/departure_dates')
-  ActionController::Base::expire_page('/data/court_counties')
-  ActionController::Base::expire_page('/data/terms')
-  ActionController::Base::expire_page('/data/names')
+  `rm #{Rails.root}/public/data/boats.html`
+  `rm #{Rails.root}/public/data/destinations.html`
+  `rm #{Rails.root}/public/data/departure_dates.html`
+  `rm #{Rails.root}/public/data/court_counties.html`
+  `rm #{Rails.root}/public/data/terms.html`
+  `rm #{Rails.root}/public/data/names.html`
 end
-
