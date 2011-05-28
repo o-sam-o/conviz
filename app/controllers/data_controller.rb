@@ -22,4 +22,10 @@ class DataController < ApplicationController
     @top_counties = Convict.top_county_stats
   end
 
+  def terms
+    @terms = Convict.term_stats
+    @term_ranges = Convict.term_range_stats
+    @term_decades = Convict.term_decade_range_stats
+  end
+
 end

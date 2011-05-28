@@ -300,3 +300,8 @@ p.notes {
 .about-container {
   margin-bottom: 20px;
 }
+
+#terms-page-container {
+  clear:both;
+  position: relative;
+}

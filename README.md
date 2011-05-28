@@ -13,27 +13,26 @@ Done
  * Departure month
 
 Pending
- * Destinations
  * Sentence Duration
  * Name Frequency
  * Convict photos
  * Add an indicator about fleet number e.g. leaving 1787 is first fleet
  * Link boats to wikipedia
- * Create bar chart showing ships that transported the most convicts
- * Pie chart destination
- * Donut pie chart with state and place destination
- * Pie chart sentence
  * Provide links to famous convicts
  * Add map ect to convict page
  * Make convicts per year a stack graph also showing destination state
  * Make the top boats graph a stacked bar graph showing how many
    convicts per each voyage
 
-Data to clean:
- * Destination
-
 TODO
- * Fix search location css
+ * Finalise Home Page
+ * Sentence page
+ * First and Last names page
+ * Page caching
+ * Text for submission
+ * Try different high chart themes
+
+TODO POST LAUNCH
  * Fix YUI tables to allow SEO
 
 http://members.iinet.net.au/~perthdps/convicts/index.html
@@ -58,3 +57,5 @@ Boats: Tall Ship : http://pixelpressicons.com/index_old.html
 Destinations: Map : http://www.iconfinder.com/icondetails/6663/128/atlas_compass_exploration_map_navigation_sailing_world_icon
 Dates: Calender : http://www.iconfinder.com/icondetails/6634/128/calendar_date_event_plan_icon
 Counties: Judge Hammer : http://ztreasureisle.wikia.com/wiki/File:JudgeItems_Gavel-icon.png
+Terms: http://www.iconfinder.com/icondetails/61841/128/lock_locked_login_user_icon
+Names: http://www.iconfinder.com/icondetails/37776/128/antique_ink_office_pen_icon

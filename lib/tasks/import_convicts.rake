@@ -17,8 +17,11 @@ task :insert_convicts => :environment do
       last_name = full_name.split(',')[1..-1].join(',').strip if full_name.split(',').length > 1
 
       alias_name = values[8]
-      alias_name = alias_name.gsub(/\(alias\)/i, '').strip if alias_name
-      # TODO values[9] can also contain an alias name
+      alias_name = clean_alias(alias_name) if alias_name
+      # There seems to be some convicts that have two aliases
+      unless values[9].blank?
+        alias_name = "#{alias_name} & #{clean_alias(values[9])}"
+      end
 
       court_and_term = values[1]
       if court_and_term =~ /Convicted at (.*) for a term/
@@ -28,10 +31,22 @@ task :insert_convicts => :environment do
       if court_and_term =~ /for a term of (.*)/
         term = $1
         term = 'Life' if term =~ /life/
-        term = $1 if term =~ /(\d+) year/
+        term = $1.to_i if term =~ /(\d+) year/
         # Handle 2 specific corner cases
         term = '7' if term =~ /seven years/
       end
+
+      term_range = nil
+      if term == 'Life'
+        term_range = 'Life'
+      elsif (1..7).include?(term)
+        term_range = '1 - 7 years'
+      elsif (8..14).include?(term)
+        term_range = '8 - 14 years'
+      elsif term.is_a?(Integer) && term > 14
+        term_range = '15+ years'
+      end
+
 
       departure_date = Date.parse(values[3]) rescue nil
 
@@ -54,6 +69,7 @@ task :insert_convicts => :environment do
         court: court,
         court_county: county_finder(court),
         term: term,
+        term_range: term_range,
         source: values[5],
         copyright: values[6]
       }
@@ -115,4 +131,8 @@ def clean_boat(boat)
   when  /^Departure:/ then nil
   else boat
   end
+end
+
+def clean_alias(alias_name)
+  alias_name.gsub(/\(alias\)/i, '').strip
 end

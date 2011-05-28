@@ -61,6 +61,28 @@ class Convict < ActiveRecord::Base
     query_to_map('select court_county, count(*) as convicts from convicts where court_county is not null group by court_county order by count(*) desc limit 15')
   end
 
+  def self.term_stats
+    query_to_map('select term, count(*) as convicts from convicts group by term having count(*) > 1 order by count(*) desc')
+  end
+
+  def self.term_range_stats
+    query_to_map('select term_range, count(*) as convicts from convicts where term_range is not null group by term_range ')
+  end
+
+  def self.term_decade_range_stats
+    decades = {}
+    start_year = 1780
+    until start_year == 1870
+      end_year = start_year + 10
+      decades["#{start_year}-#{end_year}"] = {}
+      query_to_map("select term_range, count(*) as convicts from convicts where term_range is not null and  departure_year >= #{start_year} and departure_year < #{end_year} group by term_range").each do |decade_map|
+        decades["#{start_year}-#{end_year}"][decade_map[:term_range]] = decade_map[:convicts].to_i
+      end
+      start_year = end_year
+    end
+    return decades
+  end
+
 private
 
   def self.query_to_map(query)

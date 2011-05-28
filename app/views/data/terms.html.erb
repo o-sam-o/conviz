@@ -1,0 +1,171 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'highcharts' %>
+
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/datatable/assets/skins/sam/datatable.css" /> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/json/json-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datasource/datasource-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/event-delegate/event-delegate-min.js"></script> 
+  <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datatable/datatable-min.js"></script>
+<% end %>
+
+<% content_for :page_header do %>
+  <h2 class="page-title">Convict Sentences</h2>
+<% end %>
+
+<div id="terms-page-container">
+
+  <div id="term-table-container" class="widget">
+    <h3 class="widget-section-title widget-title-table-icon">Browse By Sentence</h3>
+    <div id="data-table">Loading ...</div>
+  </div>
+
+  <script>
+    YAHOO.util.Event.addListener(window, "load", function() {
+            var tableData = <%= raw @terms.to_json %>;
+
+            var columnDefs = [
+                {key:"term", label: "Sentence", sortable:true, resizeable:true},
+                {key:"convicts", label: "Convicts", formatter: "number", sortable:true, resizeable:true}
+            ];
+     
+            var tableDS = new YAHOO.util.DataSource(tableData);
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+            tableDS.responseSchema = {
+                fields: ["term", "convicts"]
+            };
+
+            var dataTable = new YAHOO.widget.DataTable("data-table",
+              columnDefs, tableDS, {sortedBy : {key:"convicts", dir: 'desc'}});
+
+            //Hightlight row on mouse hover
+            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
+            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
+
+            //Handle user clicking on a row
+            dataTable.subscribe("rowClickEvent", function(oArgs){
+              var elTarget = oArgs.target;
+              var oRecord = this.getRecord(elTarget);
+              window.location.href = '/convicts/?term=' + oRecord.getData("term");
+            }); 
+
+            return {
+                oDS: tableDS,
+                oDT: dataTable
+            };
+    });
+  </script>
+
+<div id="term-range-graph-container" class="widget">
+  <h3 class="widget-section-title widget-title-graph-icon">Sentence Ranges</h3>
+  <div id="term-range-graph"> </div>
+</div>
+
+<script>
+$(document).ready(function() {
+   new Highcharts.Chart({
+      chart: {
+         renderTo: 'term-range-graph',
+         plotBackgroundColor: null,
+         plotBorderWidth: null,
+         plotShadow: true
+      },
+      title: {
+         text: null
+      },
+      credits: {
+        enabled: false
+      },      
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
+         }
+      },
+      plotOptions: {
+         pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: true,
+               color:'#000000',
+               connectorColor: '#000000',
+               formatter: function() {
+                  return '<b>'+ this.point.name +'</b>'
+               }
+            }
+         }
+      },
+       series: [{
+         type: 'pie',
+         name: 'Sentence Ranges',
+         data: [
+            <%= @term_ranges.collect { |v| "['#{v[0]}', #{v[1]}]"  }.join(', ')  %>
+         ]
+      }]
+   });
+});
+</script>
+
+<div id="term-departure-date-graph-container" class="widget">
+  <h3 class="widget-section-title widget-title-graph-icon">Sentence Vs Departure Decade</h3>
+  <div id="term-departure-date-graph"> </div>
+</div>
+
+<script>
+var chart;
+$(document).ready(function() {
+   chart = new Highcharts.Chart({
+      chart: {
+         renderTo: 'term-departure-date-graph',
+         defaultSeriesType: 'column'
+      },
+      title: {
+         text: null
+      },
+      xAxis: {
+        categories: <%= raw @term_decades.keys.to_json %>
+      },
+      yAxis: {
+         min: 0,
+         title: {
+            text: 'Convicts'
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         backgroundColor: '#FFFFFF',
+         align: 'left',
+         verticalAlign: 'top',
+         x: 100,
+         y: 70,
+         floating: true,
+         shadow: true
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+               this.x +': '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
+         }
+      },
+      plotOptions: {
+         column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+         }
+      },
+      series: <%= 
+        series = ['1 - 7 years', '8 - 14 years', '15+ years', 'Life'].collect do |term_range|
+          {
+            name: term_range,
+            data: @term_decades.keys.collect { |decade| @term_decades[decade][term_range] || 0 }
+          }
+        end.to_json
+        raw series
+      %>
+   });
+   
+   
+});
+</script>  
+
+</div>

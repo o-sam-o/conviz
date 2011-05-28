@@ -10,6 +10,10 @@ class ConvictsController < ApplicationController
       @convicts = @convicts.where(:boat => params[:boat]) 
     end
 
+    unless params[:term].blank?
+      @convicts = @convicts.where(:term => params[:term]) 
+    end
+
     unless params[:departure_year].blank?
       @convicts = @convicts.where(:departure_year => params[:departure_year]) 
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110521122507) do
+ActiveRecord::Schema.define(:version => 20110526112736) do
 
   create_table "convicts", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20110521122507) do
     t.string   "destination_state"
     t.string   "copyright",         :limit => 1024
     t.string   "alias_name"
+    t.string   "term_range"
   end
 
   create_table "counties", :force => true do |t|
