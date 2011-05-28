@@ -26,13 +26,9 @@ Pending
 
 TODO
  * Finalise Home Page
- * Sentence page
- * First and Last names page
  * Page caching
  * Text for submission
  * Try different high chart themes
- * Google analytics
- * Make term a link on show convicts page
 
 TODO POST LAUNCH
  * Fix YUI tables to allow SEO
