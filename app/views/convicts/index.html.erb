@@ -18,7 +18,11 @@
     <% elsif params[:court_county] %>
       Convicts convicted near <%= params[:court_county] %>
     <% elsif params[:term] %>
-      Convicts sentences to <%= humanize_term params[:term] %>      
+      Convicts sentences to <%= humanize_term params[:term] %>
+    <% elsif params[:first_name] %>
+      Convicts with first name <%= humanize_term params[:first_name].titleize %>
+    <% elsif params[:last_name] %>
+      Convicts with last name <%= humanize_term params[:last_name].titleize %>
     <% elsif params[:q].present? %>
       Searching Convicts for: <%= params[:q].titleize %>
     <% else %>

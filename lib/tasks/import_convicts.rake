@@ -13,8 +13,8 @@ task :insert_convicts => :environment do
 
       full_name = values[7]
       next if full_name.blank?
-      first_name = full_name.split(',')[0].strip
-      last_name = full_name.split(',')[1..-1].join(',').strip if full_name.split(',').length > 1
+      last_name = full_name.split(',')[0].strip
+      first_name = full_name.split(',')[1..-1].join(',').strip if full_name.split(',').length > 1
 
       alias_name = values[8]
       alias_name = clean_alias(alias_name) if alias_name

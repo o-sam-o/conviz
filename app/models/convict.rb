@@ -83,6 +83,14 @@ class Convict < ActiveRecord::Base
     return decades
   end
 
+  def self.first_name_stats
+    query_to_map('select first_name, count(*) as convicts from convicts group by first_name order by count(*) desc limit 50')
+  end
+
+  def self.last_name_stats
+    query_to_map('select last_name, count(*) as convicts from convicts group by last_name order by count(*) desc limit 50')
+  end
+
 private
 
   def self.query_to_map(query)

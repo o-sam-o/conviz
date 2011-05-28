@@ -15,4 +15,242 @@
 
 <div id="names-page-container">
 
+  <div id="first-names-search-container" class="widget">
+    <h3 class="widget-section-title widget-title-text-icon">Search by First Name</h3>
+    <div>
+        <%= form_tag(convicts_path, :method => "get") do %>
+          <%= label_tag "first_name", "First Name:" %> 
+          <input type="input" name="first_name" />
+          <%= submit_tag "Search", :class => "action-button" %>
+        <% end %>
+    </div>
+  </div>
+
+  <div id="first-names-table-container" class="widget">
+    <h3 class="widget-section-title widget-title-table-icon">Browse Top 50 First Names</h3>
+    <div id="first-name-data-table">Loading ...</div>
+  </div>
+
+  <script>
+    YAHOO.util.Event.addListener(window, "load", function() {
+            var tableData = <%= raw @first_names.to_json %>;
+
+            var columnDefs = [
+                {key:"first_name", label: "First Name", sortable:true, resizeable:true},
+                {key:"convicts", label: "Convicts", formatter: "number", sortable:true, resizeable:true}
+            ];
+     
+            var tableDS = new YAHOO.util.DataSource(tableData);
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+            tableDS.responseSchema = {
+                fields: ["first_name", "convicts"]
+            };
+
+            var dataTable = new YAHOO.widget.DataTable("first-name-data-table",
+              columnDefs, tableDS, {sortedBy : {key:"convicts", dir: 'desc'}});
+
+            //Hightlight row on mouse hover
+            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
+            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
+
+            //Handle user clicking on a row
+            dataTable.subscribe("rowClickEvent", function(oArgs){
+              var elTarget = oArgs.target;
+              var oRecord = this.getRecord(elTarget);
+              window.location.href = '/convicts/?first_name=' + oRecord.getData("first_name");
+            }); 
+
+            return {
+                oDS: tableDS,
+                oDT: dataTable
+            };
+    });
+  </script>
+
+  <div id="last-names-search-container" class="widget">
+    <h3 class="widget-section-title widget-title-text-icon">Search by Last Name</h3>
+    <div>
+        <%= form_tag(convicts_path, :method => "get") do %>
+          <%= label_tag "last_name", "Last Name:" %> 
+          <input type="input" name="last_name" />
+          <%= submit_tag "Search", :class => "action-button" %>
+        <% end %>
+    </div>
+  </div>
+
+  <div id="last-names-table-container" class="widget">
+    <h3 class="widget-section-title widget-title-table-icon">Browse Top 50 Last Names</h3>
+    <div id="last-name-data-table">Loading ...</div>
+  </div>
+
+  <script>
+    YAHOO.util.Event.addListener(window, "load", function() {
+            var tableData = <%= raw @last_names.to_json %>;
+
+            var columnDefs = [
+                {key:"last_name", label: "First Name", sortable:true, resizeable:true},
+                {key:"convicts", label: "Convicts", formatter: "number", sortable:true, resizeable:true}
+            ];
+     
+            var tableDS = new YAHOO.util.DataSource(tableData);
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+            tableDS.responseSchema = {
+                fields: ["last_name", "convicts"]
+            };
+
+            var dataTable = new YAHOO.widget.DataTable("last-name-data-table",
+              columnDefs, tableDS, {sortedBy : {key:"convicts", dir: 'desc'}});
+
+            //Hightlight row on mouse hover
+            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
+            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
+
+            //Handle user clicking on a row
+            dataTable.subscribe("rowClickEvent", function(oArgs){
+              var elTarget = oArgs.target;
+              var oRecord = this.getRecord(elTarget);
+              window.location.href = '/convicts/?last_name=' + oRecord.getData("last_name");
+            }); 
+
+            return {
+                oDS: tableDS,
+                oDT: dataTable
+            };
+    });
+  </script>
+
+
+    <div id="first-names-graph-container" class="widget">
+      <h3 class="widget-section-title widget-title-graph-icon">Top First Names</h3>
+      <div id="first-names-graph"> </div>
+    </div>
+
+    <script>
+
+$(document).ready(function() {
+   new Highcharts.Chart({
+      chart: {
+         renderTo: 'first-names-graph',
+         defaultSeriesType: 'bar'
+      },
+      title: {
+         text: null
+      },
+      xAxis: {
+        categories: <%= raw @first_names[0..8].collect { |m| m[:first_name] }.to_json %>,
+         title: {
+            text: null
+         }
+      },
+      yAxis: {
+         min: 0,
+         maxPadding: 0.3,
+         endOnTick: false,
+         title: {
+            text: 'Convicts'
+         }
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+                this.series.name +': '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
+         }
+      },
+      plotOptions: {
+         bar: {
+            dataLabels: {
+               enabled: true
+            }
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         align: 'right',
+         verticalAlign: 'bottom',
+         x: -20,
+         y: -50,
+         floating: true,
+         borderWidth: 1,
+         backgroundColor: '#FFFFFF',
+         shadow: true
+      },
+      credits: {
+         enabled: false
+      },
+      series: [{
+        name: 'First Names',
+        data: <%= raw @first_names[0..8].collect { |m| m[:convicts].to_i }.to_json %>
+      }]
+    });
+   });
+
+    </script>
+
+    <div id="last-names-graph-container" class="widget">
+      <h3 class="widget-section-title widget-title-graph-icon">Top Last Names</h3>
+      <div id="last-names-graph"> </div>
+    </div>
+
+    <script>
+
+$(document).ready(function() {
+   new Highcharts.Chart({
+      chart: {
+         renderTo: 'last-names-graph',
+         defaultSeriesType: 'bar'
+      },
+      title: {
+         text: null
+      },
+      xAxis: {
+        categories: <%= raw @last_names[0..8].collect { |m| m[:last_name] }.to_json %>,
+         title: {
+            text: null
+         }
+      },
+      yAxis: {
+         min: 0,
+         maxPadding: 0.3,
+         endOnTick: false,
+         title: {
+            text: 'Convicts'
+         }
+      },
+      tooltip: {
+         formatter: function() {
+            return ''+
+                this.series.name +': '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
+         }
+      },
+      plotOptions: {
+         bar: {
+            dataLabels: {
+               enabled: true
+            }
+         }
+      },
+      legend: {
+         layout: 'vertical',
+         align: 'right',
+         verticalAlign: 'bottom',
+         x: -20,
+         y: -50,
+         floating: true,
+         borderWidth: 1,
+         backgroundColor: '#FFFFFF',
+         shadow: true
+      },
+      credits: {
+         enabled: false
+      },
+      series: [{
+        name: 'Last Names',
+        data: <%= raw @last_names[0..8].collect { |m| m[:convicts].to_i }.to_json %>
+      }]
+    });
+   });
+
+    </script>
+
+
 </div>

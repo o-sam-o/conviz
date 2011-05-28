@@ -29,7 +29,8 @@ class DataController < ApplicationController
   end
 
   def names
-
+    @first_names = Convict.first_name_stats
+    @last_names = Convict.last_name_stats
   end
 
 end

@@ -14,6 +14,14 @@ class ConvictsController < ApplicationController
       @convicts = @convicts.where(:term => params[:term]) 
     end
 
+    unless params[:last_name].blank?
+      @convicts = @convicts.where('lower(last_name) = ?', params[:last_name].downcase) 
+    end
+
+    unless params[:first_name].blank?
+      @convicts = @convicts.where('lower(first_name) = ?', params[:first_name].downcase) 
+    end    
+
     unless params[:departure_year].blank?
       @convicts = @convicts.where(:departure_year => params[:departure_year]) 
     end

@@ -339,3 +339,61 @@ p.notes {
   top: 420px;
   width: 680px;
 }
+
+#names-page-container {
+  clear:both;
+  position: relative;
+  height: 1700px;
+}
+
+#names-page-container table {
+  width: 100%;
+}
+
+
+#first-names-graph-container {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 460px;  
+}
+
+#last-names-graph-container {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 460px;  
+}
+
+#first-names-search-container {
+  position: absolute;
+  left: 5px;
+  top: 440px;
+  width: 460px;
+}
+
+#first-names-search-container form, #last-names-search-container form  {
+  margin-top: 20px;
+  margin-left: 5px;
+}
+
+#last-names-search-container {
+  position: absolute;
+  right: 5px;
+  top: 440px;
+  width: 460px;
+}
+
+#first-names-table-container {
+  position: absolute;
+  left: 5px;
+  top: 530px;
+  width: 460px;
+}
+
+#last-names-table-container {
+  position: absolute;
+  right: 5px;
+  top: 530px;
+  width: 460px;
+}
