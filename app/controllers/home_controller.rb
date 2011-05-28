@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
 
+  caches_page :index, :about
+
   def index
     @years, @years_map = Convict.year_stats
     @top_boats = Convict.top_boat_stats
