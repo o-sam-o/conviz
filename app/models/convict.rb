@@ -66,7 +66,7 @@ class Convict < ActiveRecord::Base
   end
 
   def self.term_range_stats
-    query_to_map('select term_range, count(*) as convicts from convicts where term_range is not null group by term_range ')
+    query_to_map('select term_range, count(*) as convicts from convicts where term_range is not null group by term_range')
   end
 
   def self.term_decade_range_stats
