@@ -101,14 +101,12 @@ $(document).ready(function() {
          type: 'pie',
          name: 'Sentence Ranges',
          data: [
-            <%= @term_ranges.collect { |v| "['#{v[0]}', #{v[1]}]"  }.join(', ')  %>
+            <%= @term_ranges.collect { |v| "['#{v[:term_range]}', #{v[:convicts]}]"  }.join(', ')  %>
          ]
       }]
    });
 });
 </script>
-
-<%= @term_ranges.inspect %>
 
 <div id="term-departure-date-graph-container" class="widget">
   <h3 class="widget-section-title widget-title-graph-icon">Sentence Vs Departure Decade</h3>
