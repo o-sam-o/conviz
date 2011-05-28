@@ -1,0 +1,52 @@
+<div id="term-range-graph-container" class="widget">
+  <h3 class="widget-section-title widget-title-graph-icon">Sentence Ranges</h3>
+  <div id="term-range-graph"> </div>
+</div>
+
+<script>
+$(document).ready(function() {
+   new Highcharts.Chart({
+      chart: {
+         renderTo: 'term-range-graph',
+         plotBackgroundColor: null,
+         plotBorderWidth: null,
+         plotShadow: true,
+         spacingTop: 0,
+         marginTop: 0
+      },
+      title: {
+         text: null
+      },
+      credits: {
+        enabled: false
+      },
+      tooltip: {
+         formatter: function() {
+            return '<b>'+ this.point.name +'</b>: '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
+         }
+      },
+      plotOptions: {
+         pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+               enabled: true,
+               color:'#000000',
+               connectorColor: '#000000',
+               formatter: function() {
+                  return '<b>'+ this.point.name +'</b>'
+               }
+            }
+         }
+      },
+       series: [{
+         type: 'pie',
+         name: 'Sentence Ranges',
+         data: [
+            <%= @term_ranges.collect { |v| "['#{v[:term_range]}', #{v[:convicts]}]"  }.join(', ')  %>
+         ]
+      }]
+   });
+});
+</script>
+

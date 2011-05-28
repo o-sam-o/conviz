@@ -28,7 +28,6 @@ TODO
  * Finalise Home Page
  * Date invalid on iPad and Safari
  * Text for submission
- * Try different high chart themes
 
 TODO POST LAUNCH
  * Fix YUI tables to allow SEO
