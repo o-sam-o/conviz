@@ -17,7 +17,7 @@
   <strong>Departed:</strong> <%= @convict.departure_date.blank? ? 'Unknown' : link_to(@convict.departure_date.strftime("#{@convict.departure_date.day.ordinalize} %B %Y"), convicts_path(:year =>  @convict.departure_year)) %><br/>
   <strong>Destination:</strong> <%= @convict.destination.blank? ? 'Unknown' : link_to(@convict.destination, convicts_path(:destination =>  @convict.destination)) %><%= ", #{@convict.destination_state}" unless @convict.destination_state.nil? %><br/>
   <strong>Court:</strong> <%= @convict.court %> <% unless @convict.court_county.blank? %> in <%= link_to @convict.court_county, convicts_path(:court_county =>  @convict.court_county) %> <% end %><br/>
-  <strong>Term:</strong> <%= link_to(humanize_term(@convict.term), convicts_path(:term =>  @convict.term)) %>
+  <strong>Sentence:</strong> <%= link_to(humanize_term(@convict.term), convicts_path(:term =>  @convict.term)) %>
   </p>
 
   <h3>Boring Stuff</h3>
