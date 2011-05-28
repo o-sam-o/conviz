@@ -28,6 +28,8 @@
     <%= link_to "Boats", {:controller => :data, :action => :boats}, :id => 'boats-link' %>
     <%= link_to "Conviction County", {:controller => :data, :action => :court_counties}, :id => 'court-counties-link' %>
     <%= link_to "Destinations", {:controller => :data, :action => :destinations}, :id => 'destinations-link' %>
+    <%= link_to "Sentences", {:controller => :data, :action => :terms}, :id => 'terms-link' %>
+    <%= link_to "Names", {:controller => :data, :action => :names}, :id => 'names-link' %>
   </div>
 
   <%= render :partial => '/data/top_boats_chart' %>

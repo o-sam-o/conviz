@@ -266,35 +266,42 @@ p.notes {
   clear: both;
 }
 
-#search-convicts-link, #departure-dates-link, #boats-link, #court-counties-link, #destinations-link {
+#search-convicts-link, #departure-dates-link, #boats-link, #court-counties-link, #destinations-link, #terms-link, #names-link {
   display: block;
   float: left;
   margin-top: 9px;
-  padding: 135px 10px 5px;
-  width: 140px;
+  padding: 115px 10px 5px;
+  width: 115px;
   text-align: center;
   font-weight: bold;
 }
 
 #search-convicts-link {
-  margin-left: 75px;
-  background: url(images/convicts_128.png) top center no-repeat; 
+  background: url(images/convicts_100.png) top center no-repeat; 
 }
 
 #departure-dates-link{
-  background: url(images/departure_dates_128.png) top center no-repeat; 
+  background: url(images/departure_dates_100.png) top center no-repeat; 
 }
 
 #boats-link {
-  background: url(images/boats_128.jpg) top center no-repeat; 
+  background: url(images/boats_100.jpg) top center no-repeat; 
 }
 
 #court-counties-link {
-  background: url(images/conviction_counties_128.png) top center no-repeat; 
+  background: url(images/conviction_counties_100.png) top center no-repeat; 
 }
 
 #destinations-link {
-  background: url(images/destinations_128.png) top center no-repeat; 
+  background: url(images/destinations_100.png) top center no-repeat; 
+}
+
+#terms-link {
+  background: url(images/terms_100.png) top center no-repeat; 
+}
+
+#names-link {
+  background: url(images/names_100.png) top center no-repeat; 
 }
 
 .about-container {

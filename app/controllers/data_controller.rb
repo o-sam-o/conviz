@@ -28,4 +28,8 @@ class DataController < ApplicationController
     @term_decades = Convict.term_decade_range_stats
   end
 
+  def names
+
+  end
+
 end
