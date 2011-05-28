@@ -1,5 +1,7 @@
 class DataController < ApplicationController
 
+  caches_page :boats, :destinations, :departure_dates, :court_counties, :terms, :names
+
   def boats
     @boats = Convict.boat_stats
     @top_boats = Convict.top_boat_stats
