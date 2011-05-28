@@ -30,8 +30,8 @@ classes.slice(1).forEach(function(d) {
 var format = pv.Format.number();
 
   var vis = new pv.Panel()
-.width(420)
-  .height(380);
+  .width(<%= width ||= 420 %>)
+  .height(<%= height ||= 380 %>);
 
   vis.add(pv.Layout.Pack)
   .top(-10)  

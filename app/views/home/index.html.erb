@@ -19,7 +19,7 @@
 <div id="home-page-container">
   <%= render :partial => '/data/departure_year_graph', :locals => { :graph_height => 360 } %>
 
-  <%= render :partial => '/data/conviction_locations_map' %>
+  <%= render :partial => '/data/conviction_locations_map', :locals => { :graph_height => 340 } %>
 
   <div id="site-map-container" class="widget">
     <h3 class="widget-section-title widget-title-text-icon">Explore Convict Records</h3>
@@ -32,8 +32,8 @@
     <%= link_to "Names", {:controller => :data, :action => :names}, :id => 'names-link' %>
   </div>
 
-  <%= render :partial => '/data/top_boats_chart' %>
+  <%= render :partial => '/data/top_boats_chart', :locals => { :width => 330, :height => 320 } %>
 
-  <%= render :partial => '/data/destinations_map', :locals => { :map_width => 470, :map_height => 400 }  %>
+  <%= render :partial => '/data/destinations_map', :locals => { :map_width => 590, :map_height => 430 }  %>
 
 </div>

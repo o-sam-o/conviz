@@ -195,30 +195,34 @@ p.notes {
 #home-page-container {
   clear: both;
   position: relative;
-  height: 1200px;
+  height: 1080px;
 }
 
 #home-page-container #year-graph-container {
-  width: 620px;
-  top: 655px;
-}
-
-#home-page-container #destinations-map-container {
-  top: 5px;
-  width: 470px;
-}
-
-#home-page-container #boats-bubble-graph-container {
-  top: 5px;
+  width: 590px;
+  top: 200px;
 }
 
 #home-page-container #counties-map-container {
-  top: 655px;
+  top: 200px;
+  width: 340px;
 }
+
+#home-page-container #destinations-map-container {
+  top: 600px;
+  width: 590px;
+}
+
+#home-page-container #boats-bubble-graph-container {
+  top: 690px;
+  width: 335px;
+}
+
+
 
 #site-map-container {
   position: absolute;
-  top: 450px;
+  top: 0px;
   left: 5px;
   width: 100%;
 }
