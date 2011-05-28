@@ -17,12 +17,12 @@ desc 'seed cache'
 task :seed_cache do
     conviz_domain = 'conviz.info'
 
-    Net::HTTP.get_print conviz_domain, '/'
+    Net::HTTP.get conviz_domain, '/'
 
-    Net::HTTP.get_print conviz_domain, '/data/boats'
-    Net::HTTP.get_print conviz_domain, '/data/destinations'
-    Net::HTTP.get_print conviz_domain, '/data/departure_dates'
-    Net::HTTP.get_print conviz_domain, '/data/court_counties'
-    Net::HTTP.get_print conviz_domain, '/data/terms'
-    Net::HTTP.get_print conviz_domain, '/data/names'
+    Net::HTTP.get conviz_domain, '/data/boats'
+    Net::HTTP.get conviz_domain, '/data/destinations'
+    Net::HTTP.get conviz_domain, '/data/departure_dates'
+    Net::HTTP.get conviz_domain, '/data/court_counties'
+    Net::HTTP.get conviz_domain, '/data/terms'
+    Net::HTTP.get conviz_domain, '/data/names'
 end
