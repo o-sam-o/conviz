@@ -304,4 +304,31 @@ p.notes {
 #terms-page-container {
   clear:both;
   position: relative;
+  height: 880px;
+}
+
+#term-table-container {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 250px;
+}
+
+#term-table-container table {
+  width: 100%;
+}
+
+#term-range-graph-container {
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  width: 680px;
+  height: 380px;
+}
+
+#term-departure-date-graph-container {
+  position: absolute;
+  left: 5px;
+  top: 420px;
+  width: 680px;
 }

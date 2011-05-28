@@ -68,7 +68,9 @@ $(document).ready(function() {
          renderTo: 'term-range-graph',
          plotBackgroundColor: null,
          plotBorderWidth: null,
-         plotShadow: true
+         plotShadow: true,
+         spacingTop: 0,
+         marginTop: 0
       },
       title: {
          text: null
@@ -122,6 +124,9 @@ $(document).ready(function() {
       title: {
          text: null
       },
+      credits: {
+        enabled: false
+      },
       xAxis: {
         categories: <%= raw @term_decades.keys.to_json %>
       },
@@ -144,7 +149,7 @@ $(document).ready(function() {
       tooltip: {
          formatter: function() {
             return ''+
-               this.x +': '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts';
+               this.x +': '+ Highcharts.numberFormat(this.y, 0, ',') +' convicts sentenced to ' + this.series.name;
          }
       },
       plotOptions: {
