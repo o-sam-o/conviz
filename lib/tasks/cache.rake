@@ -1,13 +1,13 @@
 desc 'remove all cache entries'
 task :sweep_cache => :environment do
-  ApplicationController.expire_page :controller => :home, :action => :index
-  ApplicationController.expire_page :controller => :home, :action => :about
+  ActionController::Base::expire_page('/')
+  ActionController::Base::expire_page('/home/about')
 
-  ApplicationController.expire_page :controller => :data, :action => :boats
-  ApplicationController.expire_page :controller => :data, :action => :destinations
-  ApplicationController.expire_page :controller => :data, :action => :departure_dates
-  ApplicationController.expire_page :controller => :data, :action => :court_counties
-  ApplicationController.expire_page :controller => :data, :action => :terms
-  ApplicationController.expire_page :controller => :data, :action => :names
+  ActionController::Base::expire_page('/data/boats')
+  ActionController::Base::expire_page('/data/destinations')
+  ActionController::Base::expire_page('/data/departure_dates')
+  ActionController::Base::expire_page('/data/court_counties')
+  ActionController::Base::expire_page('/data/terms')
+  ActionController::Base::expire_page('/data/names')
 end
 
