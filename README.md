@@ -31,6 +31,7 @@ TODO
 
 TODO POST LAUNCH
  * Fix YUI tables to allow SEO
+ * Github read me
 
 http://members.iinet.net.au/~perthdps/convicts/index.html
 
