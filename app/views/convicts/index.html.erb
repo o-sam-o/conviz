@@ -42,17 +42,12 @@
   <div id="convicts-table">Loading ...</div>
 
   <script>
-//From http://obvcode.blogspot.com/2007/11/easiest-way-to-check-ie-version-with.html
-var Browser = {
-  Version: function() {
-    var version = 999; // we assume a sane browser
-    if (navigator.appVersion.indexOf("MSIE") != -1)
-      // bah, IE again, lets downgrade version number
-      version = parseFloat(navigator.appVersion.split("MSIE")[1]);
-    return version;
-  }
-}
 
+    // Looks like YUI uses native JS to parse the dates, doesnt work in some browsers e.g. safari and older versions of IE
+    var supportsDateParsing = false;
+    if(YAHOO.util.DataSource.parseDate('2011-05-01').getMonth() === 4){
+      supportsDateParsing = true;
+    }
 
 var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
     var oDate = oData, sMonth;
@@ -111,7 +106,7 @@ var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
             ];
 
             //Hack for IE so date looks ok .... this makes me sad :(
-            if (Browser.Version() < 9) {
+            if (!supportsDateParsing) {
               delete columnDefs[2]['formatter'];
             }
 
@@ -130,7 +125,7 @@ var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
             };
 
             //Hack for IE so date looks ok .... this makes me sad :(
-            if (Browser.Version() < 9) {
+            if (!supportsDateParsing) {
               delete tableDS.responseSchema.fields[3]['parser'];
             }
 
