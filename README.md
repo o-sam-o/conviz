@@ -8,16 +8,15 @@ This project was started at Hack at the Mitchell and was developed as an entry f
 ## Features
 
 ### Convict Information
-One of the basic functions on Conviz is it makes the registry information
-available online in a user friendly format; which it achives with the
-following features:
+One of the basic functions of Conviz is it makes the registry information
+available online in a user friendly format via the following features:
 
-*  View the complete registry as paginated table; this feature also includes the
+*  View the complete registry as paginated tables; this feature also includes the
    ability to sort by any field e.g. date of departure or destination.
 *  Search for convicts by name (first, last or both)
 *  View all available information about a convict
 *  Conviz has derived some additional information about each convict
-   (e.g. county of conviction), this is displayed as along side the convict's records
+   (e.g. county of conviction), this is displayed along side the convict's records
 *  Data cleansing (merging similar but slightly different fields), e.g.
    Boat names and destinations.
 
@@ -42,7 +41,7 @@ Conviz and the site currently includes the following visualisations:
 *  Bubble chart of the top 100 boats
 *  Geo intensity map of convict destinations
 *  Donut graph of convict destinations and destination states
-*  Stack area graph of conviction year and destination state
+*  Stacked area graph of conviction year and destination state
 *  Column chart of departure month
 *  Pie chart of departure decade
 *  Bar chart of top conviction counties
