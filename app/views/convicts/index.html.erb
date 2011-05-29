@@ -51,6 +51,9 @@
 
 var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
     var oDate = oData, sMonth;
+    if(!oDate){
+      return ''
+    }
     switch(oDate.getMonth()) {
         case 0:
             sMonth = "Jan";
