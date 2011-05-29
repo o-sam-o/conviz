@@ -3,7 +3,7 @@
 ## Overview
 Conviz is a Rails web app that allows web based access and visualisation
 of the [British Convict Transportation Registry](http://data.gov.au/dataset/british-convict-transportation-registers/).  
-This project was started at Hack at the Mitchell and was developed as an entry for ({Library:/hack/})[http://libraryhack.org/].
+This project was started at Hack at the Mitchell and was developed as an entry for [{Library:/hack/}](http://libraryhack.org/).
 
 ## Features
 
