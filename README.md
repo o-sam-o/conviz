@@ -26,6 +26,7 @@ The registry contains a lot of entries (+123,000), Conviz allows the registry to
 filtered into smaller subsets of related convicts.
 
 Convicts can be filtered by:
+
 *  Boat
 *  Destination
 *  Departure year
@@ -60,25 +61,18 @@ TODO
 
 Ideas
 
-Done
- * Convicts per year
- * Boats
- * Origin
- * Departure month
-
 Pending
- * Sentence Duration
- * Name Frequency
+
  * Convict photos
  * Add an indicator about fleet number e.g. leaving 1787 is first fleet
  * Link boats to wikipedia
  * Provide links to famous convicts
  * Add map ect to convict page
- * Make convicts per year a stack graph also showing destination state
  * Make the top boats graph a stacked bar graph showing how many
    convicts per each voyage
 
 TODO
+
  * Finalise Home Page
  * Add top of page warning back for ie6
  * Text for submission
@@ -87,6 +81,7 @@ TODO
  * Convict photos?
 
 TODO POST LAUNCH
+
  * Fix YUI tables to allow SEO
  * Github read me
 
