@@ -73,7 +73,7 @@
           <div id="rotator">
               <%= form_tag(convicts_path, :method => "get", :id => 'convict-search-form') do %>
                 <%= label_tag "q", "Convict Search:" %> 
-                <input type="search" name="q" value="<%= params[:q] %>" />
+                <input type="search" name="q" value="<%= params[:q] %>" id="convict-search-field"/>
                 <%= submit_tag "Search", :class => "action-button" %>
               <% end %>
           </div> <!-- #rotator .two-of-two -->
