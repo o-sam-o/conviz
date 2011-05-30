@@ -2,10 +2,6 @@
   color: #CCC;
 }
 
-#convict-search-field {
-  height: 12px;
-}
-
 #convicts-table table {
   width: 100%;
 }
@@ -240,10 +236,6 @@ p.notes {
   position: absolute;
   right: 10px;
   bottom: 0px;
-}
-
-#rotator input, select {
-  vertical-align:text-top;
 }
 
 .action-button {
