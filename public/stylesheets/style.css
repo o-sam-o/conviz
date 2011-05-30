@@ -24,7 +24,7 @@
 #departure-date-page-container {
   clear:both;
   position: relative;
-  height: 1800px;
+  height: 2000px;
 }
 
 #year-graph-container {
@@ -159,7 +159,7 @@ p.notes {
 #court-counties-page-container {
   clear:both;
   position: relative;
-  height: 2435px;
+  height: 2635px;
 }
 
 #counties-map-container {
@@ -339,7 +339,7 @@ p.notes {
 #names-page-container {
   clear:both;
   position: relative;
-  height: 1700px;
+  height: 1800px;
 }
 
 #names-page-container table {
