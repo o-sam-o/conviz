@@ -73,8 +73,6 @@ Pending
 TODO
 
  * Finalise Home Page
- * Add top of page warning back for ie6
- * Text for submission
  * Download all records as CSV
  * Add quality comment to counties page
  * Convict photos?
