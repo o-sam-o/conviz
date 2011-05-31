@@ -14,6 +14,7 @@
 
   <script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
   <script src="http://yui.yahooapis.com/2.9.0/build/logger/logger-min.js"></script>
+  <script src="http://yui.yahooapis.com/2.9.0/build/stylesheet/stylesheet-min.js"></script>
 
   <%= csrf_meta_tag %>
 
@@ -44,9 +45,7 @@
 
   <script>
     //Hide non YUI table for JS users
-    var sheet = document.createElement('style')
-    sheet.innerHTML = ".raw-yui-table {display: none}";
-    document.body.appendChild(sheet);
+    new YAHOO.util.StyleSheet(".raw-yui-table {display: none}");
   </script>
 
   <div id="header" class="row">
