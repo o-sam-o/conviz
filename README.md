@@ -52,9 +52,24 @@ Conviz and the site currently includes the following visualisations:
 *  Bar chart of most popular last names
 
 ## Code Quality
-TODO
+The quality of code on this project is particularly low, there are no
+tests, tons of inline Javascript and various other hacks.  This project
+was completed in a fairly short amount of time that required a bit of
+corner cutting.
 
-## More Doco Coming Soon
+## Dev
+
+Download the convict transport registry from: [http://data.gov.au/dataset/british-convict-transportation-registers/](http://data.gov.au/dataset/british-convict-transportation-registers/) and put it in the lib folder.  
+
+Then run:
+
+  rake db:migrate
+  rake seed:counties
+  rake seed:destinations
+  rake insert_convicts
+
+You should then be able to start the rails server and view all the
+convict records.
 
 ## Notes
 
@@ -72,20 +87,8 @@ Pending
 
 TODO
 
- * Finalise Home Page
  * Download all records as CSV
- * Add quality comment to counties page
- * Convict photos?
 
 TODO POST LAUNCH
 
  * Fix YUI tables to allow SEO
- * Github read me
-
-http://members.iinet.net.au/~perthdps/convicts/index.html
-
-West Aust Ships:
-http://en.wikipedia.org/wiki/List_of_convict_ships_to_Western_Australia
-
-Famous Convict:
-http://en.wikipedia.org/wiki/Convicts_in_Australia
