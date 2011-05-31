@@ -63,10 +63,10 @@ Download the convict transport registry from: [http://data.gov.au/dataset/britis
 
 Then run:
 
-  rake db:migrate
-  rake seed:counties
-  rake seed:destinations
-  rake insert_convicts
+    rake db:migrate
+    rake seed:counties
+    rake seed:destinations
+    rake insert_convicts
 
 You should then be able to start the rails server and view all the
 convict records.
