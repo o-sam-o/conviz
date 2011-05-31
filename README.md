@@ -88,7 +88,3 @@ Pending
 TODO
 
  * Download all records as CSV
-
-TODO POST LAUNCH
-
- * Fix YUI tables to allow SEO
