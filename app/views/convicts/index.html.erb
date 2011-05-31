@@ -97,8 +97,6 @@ var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
 
 
     YAHOO.util.Event.addListener(window, "load", function() {
-            var tableData = <%= raw @convicts.to_json %>;
-
             var columnDefs = [
                 {key:"name", label: "Name", sortable:true, resizeable:true},
                 {key:"boat", label: "Boat", sortable:true, resizeable:true},
@@ -113,8 +111,8 @@ var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
               delete columnDefs[2]['formatter'];
             }
 
-            var tableDS = new YAHOO.util.DataSource(tableData);
-            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
+            var tableDS = new YAHOO.util.DataSource(YAHOO.util.Dom.get("raw-data-table"));
+            tableDS.responseType = YAHOO.util.DataSource.TYPE_HTMLTABLE;
             tableDS.responseSchema = {
               fields: [
                  {key:"id"}, 
@@ -160,6 +158,34 @@ var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
   </script>
 
   <%= will_paginate @convicts %>
+
+  <table id="raw-data-table" class="raw-yui-table">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>boat</th>
+        <th>departure_date</th>
+        <th>court</th>
+        <th>destination</th>
+        <th>term</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @convicts.each do |convict| %>
+        <tr>
+          <td><%= convict.id %></td>
+          <td><%= link_to convict.name, convict_path(convict) %></td>
+          <td><%= convict.boat %></td>
+          <td><%= convict.departure_date %></td>
+          <td><%= convict.court %></td>
+          <td><%= convict.destination %></td>
+          <td><%= convict.term %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
 <% else %>
   <p>No convicts</p>
 <% end %>

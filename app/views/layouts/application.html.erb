@@ -42,6 +42,13 @@
 </script>
 <![endif]-->
 
+  <script>
+    //Hide non YUI table for JS users
+    var sheet = document.createElement('style')
+    sheet.innerHTML = ".raw-yui-table {display: none}";
+    document.body.appendChild(sheet);
+  </script>
+
   <div id="header" class="row">
     <div class="section">
       <header class="row">
