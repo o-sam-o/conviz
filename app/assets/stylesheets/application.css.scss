@@ -21,9 +21,13 @@
   clear: both;
 }
 
-#departure-date-page-container {
+#base-page-container {
   clear:both;
   position: relative;
+}
+
+#departure-date-page-container {
+  @extend #base-page-container;
   height: 2000px;
 }
 
@@ -90,7 +94,7 @@
 }
 
 #boats-table-container {
-  clear: both;
+  @extend #base-page-container;
 }
 
 #boats-table-container table {
@@ -98,8 +102,7 @@
 }
 
 .graphs-container {
-  clear:both;
-  position: relative;
+  @extend #base-page-container;
   height: 430px;
 }
 
@@ -107,14 +110,14 @@
   width: 450px;
   position: absolute;
   left: 5px;
-  top 5px;  
+  top: 5px;  
 }
 
 #boats-bubble-graph-container {
   width: 450px;
   position: absolute;
   right: 10px;
-  top 5px;
+  top: 5px;
 }
 
 #boats-bubble-graph-container .notes {
@@ -126,8 +129,7 @@ p.notes {
 }
 
 #destinations-page-container {
-  clear:both;
-  position: relative;
+  @extend #base-page-container;
   height: 650px;
 }
 
@@ -157,8 +159,7 @@ p.notes {
 }
 
 #court-counties-page-container {
-  clear:both;
-  position: relative;
+  @extend #base-page-container;
   height: 2635px;
 }
 
@@ -189,8 +190,7 @@ p.notes {
 }
 
 #home-page-container {
-  clear: both;
-  position: relative;
+  @extend #base-page-container;
   height: 1080px;
 }
 
@@ -305,8 +305,7 @@ p.notes {
 }
 
 #terms-page-container {
-  clear:both;
-  position: relative;
+  @extend #base-page-container;
   height: 880px;
 }
 
@@ -337,8 +336,7 @@ p.notes {
 }
 
 #names-page-container {
-  clear:both;
-  position: relative;
+  @extend #base-page-container;
   height: 1800px;
 }
 
