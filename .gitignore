@@ -12,3 +12,4 @@ config/database.yml
 public/index.html
 public/home/about.html
 public/data/names.html
+.sass-cache/*
