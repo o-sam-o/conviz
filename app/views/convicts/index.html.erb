@@ -1,4 +1,6 @@
 <% content_for :head do %>
+  <%= javascript_include_tag "convicts/index.js" %>
+
   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/datatable/assets/skins/sam/datatable.css" /> 
   <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/json/json-min.js"></script> 
   <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
@@ -43,59 +45,6 @@
 
   <script>
 
-    // Looks like YUI uses native JS to parse the dates, doesnt work in some browsers e.g. safari and older versions of IE
-    var supportsDateParsing = false;
-    if(YAHOO.util.DataSource.parseDate('2011-05-01').getMonth() === 4){
-      supportsDateParsing = true;
-    }
-
-var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
-    var oDate = oData, sMonth;
-    if(!oDate){
-      return ''
-    }
-    switch(oDate.getMonth()) {
-        case 0:
-            sMonth = "Jan";
-            break;
-        case 1:
-            sMonth = "Feb";
-            break;
-        case 2:
-            sMonth = "Mar";
-            break;
-        case 3:
-            sMonth = "Apr";
-            break;
-        case 4:
-            sMonth = "May";
-            break;
-        case 5:
-            sMonth = "Jun";
-            break;
-        case 6:
-            sMonth = "Jul";
-            break;
-        case 7:
-            sMonth = "Aug";
-            break;
-        case 8:
-            sMonth = "Sep";
-            break;
-        case 9:
-            sMonth = "Oct";
-            break;
-        case 10:
-            sMonth = "Nov";
-            break;
-        case 11:
-            sMonth = "Dec";
-            break;
-    }
-    elCell.innerHTML = oDate.getDate()  + " " + sMonth + " " + oDate.getFullYear();
-};
-
-
     YAHOO.util.Event.addListener(window, "load", function() {
             var columnDefs = [
                 {key:"name", label: "Name", sortable:true, resizeable:true},
@@ -107,7 +56,7 @@ var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
             ];
 
             //Hack for IE so date looks ok .... this makes me sad :(
-            if (!supportsDateParsing) {
+            if (!supportsDateParsing()) {
               delete columnDefs[2]['formatter'];
             }
 
@@ -126,7 +75,7 @@ var customDateFormatter = function (elCell, oRecord, oColumn, oData) {
             };
 
             //Hack for IE so date looks ok .... this makes me sad :(
-            if (!supportsDateParsing) {
+            if (!supportsDateParsing()) {
               delete tableDS.responseSchema.fields[3]['parser'];
             }
 
