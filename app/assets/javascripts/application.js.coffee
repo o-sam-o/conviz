@@ -21,3 +21,45 @@
     when 10 then sMonth = 'Nov'
     when 11 then sMonth = 'Dec'
   elCell.innerHTML = "#{oDate.getDate()}  #{sMonth}  #{oDate.getFullYear()}"
+
+#
+# To extend YuiTable you need to implement the following methods:
+# getTableSchema
+# getColumnDefs
+# getClickUrl(record)
+# getSortUrl(column, direction)
+#
+class @YuiTable
+  constructor: (@rawTable, @yuiTableDiv, @sortBy = 'name', @sortDirection) ->
+    table = this
+    $(document).ready -> table.setupTable()
+
+  setupTable: (event) ->
+    tableDS = new YAHOO.util.DataSource(YAHOO.util.Dom.get(@rawTable))
+    tableDS.responseType = YAHOO.util.DataSource.TYPE_HTMLTABLE
+    tableDS.responseSchema = @getTableSchema()
+
+    dataTable = new YAHOO.widget.DataTable(@yuiTableDiv 
+                                           @getColumnDefs()
+                                           tableDS 
+                                           {
+                                             sortedBy: { 
+                                               key: @sortBy
+                                               dir: @getSortDirection()
+                                             }
+                                           })
+
+    # Hightlight row on mouse hover
+    dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow)
+    dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow)
+
+    # Handle user clicking on a row
+    dataTable.subscribe("rowClickEvent", (oArgs, yuiTable) ->
+        elTarget = oArgs.target
+        oRecord = this.getRecord(elTarget)
+        window.location.href = yuiTable.getClickUrl(oRecord)
+    , this)
+    # TODO support sort
+
+  getSortDirection: ->
+    if @sortDirection == 'desc' then YAHOO.widget.DataTable.CLASS_DESC else YAHOO.widget.DataTable.CLASS_ASC
