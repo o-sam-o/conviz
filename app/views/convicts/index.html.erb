@@ -25,7 +25,11 @@
 
   <div id="convicts-table">Loading ...</div>
 
-  <script2>
+  <script>
+    convictsTable = new ConvictsYuiTable("raw-data-table", "convicts-table", <%= raw params[:sort].to_json %>, <%= raw params[:direction].to_json %>)
+  </script>
+
+  <div style="display: none">
     YAHOO.util.Event.addListener(window, "load", function() {
             var columnDefs = [
                 {key:"name", label: "Name", sortable:true, resizeable:true},
@@ -85,7 +89,7 @@
             };
     });
 
-  </script2>
+  </div>
 
   <%= will_paginate @convicts %>
 

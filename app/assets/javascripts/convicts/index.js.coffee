@@ -1,4 +1,4 @@
-class ConvictsYuiTable extends @YuiTable
+class @ConvictsYuiTable extends @YuiTable
   getTableSchema: ->
     {
       fields: [
@@ -27,6 +27,3 @@ class ConvictsYuiTable extends @YuiTable
 
   getSortUrl: (column, direction) ->
     "/convicts?sort=#{column.getKey()}&direction=#{direction}"
-
-# TODO parse sort and sort dir
-convictsTable = new ConvictsYuiTable("raw-data-table", "convicts-table")
