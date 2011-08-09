@@ -1,4 +1,7 @@
 class @ConvictsYuiTable extends @YuiTable
+  constructor: (rawTable, yuiTableDiv, sortBy = 'name', sortDirection, @filteringParams) ->
+    super rawTable, yuiTableDiv, sortBy, sortDirection
+
   getTableSchema: ->
     {
       fields: [
@@ -26,4 +29,4 @@ class @ConvictsYuiTable extends @YuiTable
     "/convicts/#{record.getData('id')}"
 
   getSortUrl: (column, direction) ->
-    "/convicts?sort=#{column.getKey()}&direction=#{direction}"
+    "/convicts?sort=#{column.getKey()}&direction=#{direction}#{@filteringParams}"

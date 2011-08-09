@@ -26,7 +26,7 @@
   <div id="convicts-table">Loading ...</div>
 
   <script>
-    convictsTable = new ConvictsYuiTable("raw-data-table", "convicts-table", <%= raw params[:sort].to_json %>, <%= raw params[:direction].to_json %>)
+    convictsTable = new ConvictsYuiTable("raw-data-table", "convicts-table", <%= raw params[:sort].to_json %>, <%= raw params[:direction].to_json %>, <%= raw filtering_params(params).to_json %>)
   </script>
 
   <div style="display: none">

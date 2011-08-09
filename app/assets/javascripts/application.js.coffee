@@ -10,7 +10,7 @@
 # getSortUrl(column, direction)
 #
 class @YuiTable
-  constructor: (@rawTable, @yuiTableDiv, @sortBy = 'name', @sortDirection) ->
+  constructor: (@rawTable, @yuiTableDiv, @sortBy, @sortDirection) ->
     table = this
     $(document).ready -> table.setupTable()
 

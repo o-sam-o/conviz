@@ -1,5 +1,6 @@
 module ConvictsHelper
 
+  # TODO add support for multiple params
   def convicts_page_title(params)
      if params[:boat].present?
       "Convicts transported on the #{params[:boat]}"
@@ -20,6 +21,11 @@ module ConvictsHelper
      else
       "Convict Lists"
      end
+  end
+
+  # Returns a url fragment containing the params used to filter the convict list
+  def filtering_params(params)
+    params.collect { |value| ['sort', 'direction'].include?(value[0]) ? '' : "&#{value[0]}=#{value[1]}" }.join
   end
 
 end
