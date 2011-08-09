@@ -55,7 +55,7 @@ class @YuiTable
     YAHOO.util.DataSource.parseDate('2011-05-01').getMonth() == 4
 
   customDateFormatter: (elCell, oRecord, oColumn, oDate) ->
-    return '' unless oDate
+    return unless oDate
     switch oDate.getMonth()
       when 0 then sMonth = 'Jan'
       when 1 then sMonth = 'Feb'
@@ -69,4 +69,5 @@ class @YuiTable
       when 9 then sMonth = 'Oct'
       when 10 then sMonth = 'Nov'
       when 11 then sMonth = 'Dec'
-    elCell.innerHTML = "#{oDate.getDate()}  #{sMonth}  #{oDate.getFullYear()}"    
+    return unless sMonth
+    elCell.innerHTML = "#{oDate.getDate()}  #{sMonth}  #{oDate.getFullYear()}"
