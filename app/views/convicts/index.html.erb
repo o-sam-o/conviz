@@ -26,70 +26,11 @@
   <div id="convicts-table">Loading ...</div>
 
   <script>
-    convictsTable = new ConvictsYuiTable("raw-data-table", "convicts-table", <%= raw params[:sort].to_json %>, <%= raw params[:direction].to_json %>, <%= raw filtering_params(params).to_json %>)
+    convictsTable = new ConvictsYuiTable("raw-data-table", "convicts-table", 
+                                         <%= raw params[:sort].to_json %>, 
+                                         <%= raw params[:direction].to_json %>, 
+                                         <%= raw filtering_params(params).to_json %>)
   </script>
-
-  <div style="display: none">
-    YAHOO.util.Event.addListener(window, "load", function() {
-            var columnDefs = [
-                {key:"name", label: "Name", sortable:true, resizeable:true},
-                {key:"boat", label: "Boat", sortable:true, resizeable:true},
-                {key:"departure_date", label: "Departure Date", formatter:customDateFormatter, sortable:true, resizeable:true},
-                {key:"court", label: "Court", sortable:true, resizeable:true},
-                {key:"destination", label: "Destination", sortable:true, resizeable:true},
-                {key:"term", label: "Sentence", sortable:true, resizeable:true}
-            ];
-
-            //Hack for IE so date looks ok .... this makes me sad :(
-            if (!supportsDateParsing()) {
-              delete columnDefs[2]['formatter'];
-            }
-
-            var tableDS = new YAHOO.util.DataSource(YAHOO.util.Dom.get("raw-data-table"));
-            tableDS.responseType = YAHOO.util.DataSource.TYPE_HTMLTABLE;
-            tableDS.responseSchema = {
-              fields: [
-                 {key:"id"}, 
-                 {key:"name"},
-                 {key:"boat"},
-                 {key:"departure_date", parser:'date'},
-                 {key:"court"},
-                 {key:"destination"}, 
-                 {key:"term"}
-              ]
-            };
-
-            //Hack for IE so date looks ok .... this makes me sad :(
-            if (!supportsDateParsing()) {
-              delete tableDS.responseSchema.fields[3]['parser'];
-            }
-
-            var dataTable = new YAHOO.widget.DataTable("convicts-table",
-            columnDefs, tableDS, {sortedBy : {key:"<%= params[:sort] || 'name' %>", dir: <%= params[:direction] == 'desc' ? 'YAHOO.widget.DataTable.CLASS_DESC' : 'YAHOO.widget.DataTable.CLASS_ASC' %>}});
-
-            //Hightlight row on mouse hover
-            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
-            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
-
-            //Handle user clicking on a row
-            dataTable.subscribe("rowClickEvent", function(oArgs){
-              var elTarget = oArgs.target;
-              var oRecord = this.getRecord(elTarget);
-              window.location.href = '/convicts/' + oRecord.getData("id");
-            }); 
-            // Handle column sorting
-            dataTable.doBeforeSortColumn = function(oColumn, sSortDir) {
-              var direction = (sSortDir === YAHOO.widget.DataTable.CLASS_DESC) ? "desc" : "asc";
-              window.location.href = '/convicts/?sort=' + oColumn.getKey() + "&direction=" + direction + "<%= raw params.collect { |value| ['sort', 'direction'].include?(value[0]) ? '' : "&#{value[0]}=#{value[1]}" }.join %>";
-            };
-
-            return {
-                oDS: tableDS,
-                oDT: dataTable
-            };
-    });
-
-  </div>
 
   <%= will_paginate @convicts %>
 

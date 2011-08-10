@@ -8,7 +8,7 @@ class @ConvictsYuiTable extends @YuiTable
          {key:"id"}, 
          {key:"name"},
          {key:"boat"},
-         {key:"departure_date", parser:'date'},
+         {key:"departure_date", parser: @parseDate},
          {key:"court"},
          {key:"destination"}, 
          {key:"term"}

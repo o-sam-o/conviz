@@ -50,9 +50,20 @@ class @YuiTable
   getSortDirection: ->
     if @sortDirection == 'desc' then YAHOO.widget.DataTable.CLASS_DESC else YAHOO.widget.DataTable.CLASS_ASC
 
-  # Looks like YUI uses native JS to parse the dates, doesnt work in some browsers e.g. safari and older versions of IE
-  supportsDateParsing: ->
-    YAHOO.util.DataSource.parseDate('2011-05-01').getMonth() == 4
+  parseDate: (rawDate) -> 
+    return null unless rawDate
+
+    yuiDate = YAHOO.util.DataSource.parseDate(rawDate)
+    return yuiDate if yuiDate and yuiDate.getMonth()
+
+    # If we get here the browser is unable to natively parse the date so we have to do it manually
+    dateRegex = /(\d{4})-(\d{2})-(\d{2})/
+    matches = dateRegex.exec rawDate
+    if matches.length > 0
+      return new Date(parseInt(matches[1]), parseInt(matches[2]), parseInt(matches[3]))
+    else
+      return null
+
 
   customDateFormatter: (elCell, oRecord, oColumn, oDate) ->
     return unless oDate
