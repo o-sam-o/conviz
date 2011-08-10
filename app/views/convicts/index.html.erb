@@ -27,9 +27,9 @@
 
   <script>
     convictsTable = new ConvictsYuiTable("raw-data-table", "convicts-table", 
-                                         <%= raw params[:sort].to_json %>, 
-                                         <%= raw params[:direction].to_json %>, 
-                                         <%= raw filtering_params(params).to_json %>)
+                                         <%= as_json params[:sort] %>, 
+                                         <%= as_json params[:direction] %>, 
+                                         <%= as_json filtering_params(params) %>);
   </script>
 
   <%= will_paginate @convicts %>
