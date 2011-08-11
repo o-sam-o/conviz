@@ -7,19 +7,18 @@
 # getTableSchema
 # getColumnDefs
 # getClickUrl(record)
-# getSortUrl(column, direction)
 #
 class @YuiTable
   constructor: (@rawTable, @yuiTableDiv, @sortBy, @sortDirection) ->
     table = this
     $(document).ready -> table.setupTable()
 
-  setupTable: (event) ->
+  setupTable: ->
     tableDS = new YAHOO.util.DataSource(YAHOO.util.Dom.get(@rawTable))
     tableDS.responseType = YAHOO.util.DataSource.TYPE_HTMLTABLE
     tableDS.responseSchema = @getTableSchema()
 
-    dataTable = new YAHOO.widget.DataTable(@yuiTableDiv 
+    @dataTable = new YAHOO.widget.DataTable(@yuiTableDiv 
                                            @getColumnDefs()
                                            tableDS 
                                            {
@@ -30,22 +29,15 @@ class @YuiTable
                                            })
 
     # Hightlight row on mouse hover
-    dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow)
-    dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow)
+    @dataTable.subscribe("rowMouseoverEvent", @dataTable.onEventHighlightRow)
+    @dataTable.subscribe("rowMouseoutEvent", @dataTable.onEventUnhighlightRow)
 
     # Handle user clicking on a row
-    dataTable.subscribe("rowClickEvent", (oArgs, yuiTable) ->
+    @dataTable.subscribe("rowClickEvent", (oArgs, yuiTable) ->
         elTarget = oArgs.target
         oRecord = this.getRecord(elTarget)
         window.location.href = yuiTable.getClickUrl(oRecord)
     , this)
-
-    # Handle column sorting
-    yuiTable = this
-    dataTable.doBeforeSortColumn = (oColumn, sSortDir) ->
-      direction = if (sSortDir == YAHOO.widget.DataTable.CLASS_DESC) then "desc" else "asc"
-      window.location.href = yuiTable.getSortUrl(oColumn, direction)
-      return false
 
   getSortDirection: ->
     if @sortDirection == 'desc' then YAHOO.widget.DataTable.CLASS_DESC else YAHOO.widget.DataTable.CLASS_ASC

@@ -2,6 +2,17 @@ class @ConvictsYuiTable extends @YuiTable
   constructor: (rawTable, yuiTableDiv, sortBy = 'name', sortDirection, @filteringParams) ->
     super rawTable, yuiTableDiv, sortBy, sortDirection
 
+  setupTable: -> 
+    super
+    
+    # Handle column sorting
+    yuiTable = this
+    @dataTable.doBeforeSortColumn = (oColumn, sSortDir) ->
+      direction = if (sSortDir == YAHOO.widget.DataTable.CLASS_DESC) then "desc" else "asc"
+      window.location.href = yuiTable.getSortUrl(oColumn, direction)
+      return false
+
+
   getTableSchema: ->
     {
       fields: [
