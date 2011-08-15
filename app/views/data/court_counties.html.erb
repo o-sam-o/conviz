@@ -1,5 +1,6 @@
 <% content_for :head do %>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+  <%= javascript_include_tag "data/court_counties.js" %>
 
   <%= javascript_include_tag 'highcharts' %>
 
@@ -92,40 +93,23 @@ $(document).ready(function() {
     <div id="data-table">Loading ...</div>
   </div>
 
-  <script>
-    YAHOO.util.Event.addListener(window, "load", function() {
-            var tableData = <%= raw @counties.to_json %>;
-
-            var columnDefs = [
-                {key:"court_county", label: "Court Counties", sortable:true, resizeable:true},
-                {key:"convicts", label: "Convicts", formatter: "number", sortable:true, resizeable:true}
-            ];
-     
-            var tableDS = new YAHOO.util.DataSource(tableData);
-            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-            tableDS.responseSchema = {
-                fields: ["court_county", "convicts"]
-            };
-
-            var dataTable = new YAHOO.widget.DataTable("data-table",
-              columnDefs, tableDS, {sortedBy : {key:"court_county", dir: 'desc'}});
-
-            //Hightlight row on mouse hover
-            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
-            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
-
-            //Handle user clicking on a row
-            dataTable.subscribe("rowClickEvent", function(oArgs){
-              var elTarget = oArgs.target;
-              var oRecord = this.getRecord(elTarget);
-              window.location.href = '/convicts/?court_county=' + oRecord.getData("court_county");
-            }); 
-
-            return {
-                oDS: tableDS,
-                oDT: dataTable
-            };
-    });
-  </script>
+  <table id="raw-counties-table" class="raw-yui-table">
+    <thead>
+      <tr>
+        <th>link</th>
+        <th>court_county</th>
+        <th>convicts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @counties.each do |county| %>
+        <tr>
+          <td><%= link_to county[:court_county], convicts_path(:court_county => county[:court_county]) %></td>
+          <td><%= county[:court_county] %></td>
+          <td><%= county[:convicts] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
 </div>
