@@ -88,3 +88,4 @@ Pending
 TODO
 
  * Download all records as CSV
+ * Fix terms table sort
