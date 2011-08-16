@@ -1,6 +1,6 @@
 class DepartureDatesYuiTable extends @YuiTable
   constructor: (rawTable, yuiTableDiv) ->
-    super rawTable, yuiTableDiv, "departure_year", "desc"
+    super rawTable, yuiTableDiv, "departure_year"
 
   getTableSchema: ->
     {

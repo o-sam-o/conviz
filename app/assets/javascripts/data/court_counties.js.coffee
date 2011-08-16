@@ -1,6 +1,6 @@
 class CountiesYuiTable extends @YuiTable
   constructor: (rawTable, yuiTableDiv) ->
-    super rawTable, yuiTableDiv, "court_county", "desc"
+    super rawTable, yuiTableDiv, "court_county"
 
   getTableSchema: ->
     {

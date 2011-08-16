@@ -9,7 +9,7 @@
 # getClickUrl(record)
 #
 class @YuiTable
-  constructor: (@rawTable, @yuiTableDiv, @sortBy, @sortDirection) ->
+  constructor: (@rawTable, @yuiTableDiv, @sortBy, @sortDirection = 'desc') ->
     $(document).ready => @setupTable()
 
   setupTable: ->

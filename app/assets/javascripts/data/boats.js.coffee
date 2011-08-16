@@ -1,6 +1,6 @@
 class BoatsYuiTable extends @YuiTable
   constructor: (rawTable, yuiTableDiv) ->
-    super rawTable, yuiTableDiv, "boat", "desc"
+    super rawTable, yuiTableDiv, "boat"
 
   getTableSchema: ->
     {
