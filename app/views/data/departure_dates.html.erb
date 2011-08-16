@@ -1,5 +1,6 @@
 <% content_for :head do %>
   <%= javascript_include_tag 'highcharts' %>
+  <%= javascript_include_tag "data/departure_dates.js" %>
 
   <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/datatable/assets/skins/sam/datatable.css" /> 
   <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/json/json-min.js"></script> 
@@ -19,45 +20,25 @@
 <div id="year-table-container" class="widget">
   <h3 class="widget-section-title widget-title-table-icon">Browse By Year</h3>
   <div id="data-table">Loading ...</div>
+  <table id="raw-departure-date-table" class="raw-yui-table">
+    <thead>
+      <tr>
+        <th>link</th>
+        <th>departure_year</th>
+        <th>convicts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @years.each do |departure_year| %>
+        <tr>
+          <td><%= link_to departure_year[:departure_year], convicts_path(:departure_year => departure_year[:departure_year]) %></td>
+          <td><%= departure_year[:departure_year] %></td>
+          <td><%= departure_year[:convicts] %></td>
+        </tr>
+      <% end %>
+    </tbody>    
+  </table>
 </div>
-
-<script>
-
-    YAHOO.util.Event.addListener(window, "load", function() {
-            var tableData = <%= raw @years.to_json %>;
-
-            var columnDefs = [
-                {key:"departure_year", label: "Departure Year", sortable:true, resizeable:true},
-                {key:"convicts", label: "Convicts", formatter: "number", sortable:true, resizeable:true}
-            ];
-     
-            var tableDS = new YAHOO.util.DataSource(tableData);
-            tableDS.responseType = YAHOO.util.DataSource.TYPE_JSARRAY;
-            tableDS.responseSchema = {
-                fields: ["departure_year", "convicts"]
-            };
-
-            var dataTable = new YAHOO.widget.DataTable("data-table",
-              columnDefs, tableDS, {sortedBy : {key:"departure_year", dir: 'desc'}});
-
-            //Hightlight row on mouse hover
-            dataTable.subscribe("rowMouseoverEvent", dataTable.onEventHighlightRow);
-            dataTable.subscribe("rowMouseoutEvent", dataTable.onEventUnhighlightRow);
-
-            //Handle user clicking on a row
-            dataTable.subscribe("rowClickEvent", function(oArgs){
-              var elTarget = oArgs.target;
-              var oRecord = this.getRecord(elTarget);
-              window.location.href = '/convicts/?departure_year=' + oRecord.getData("departure_year");
-            }); 
-
-            return {
-                oDS: tableDS,
-                oDT: dataTable
-            };
-    });
-
-</script>
 
 <%= render :partial => 'departure_year_graph' %>
 
