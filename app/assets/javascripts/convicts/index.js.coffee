@@ -6,10 +6,9 @@ class @ConvictsYuiTable extends @YuiTable
     super
     
     # Handle column sorting
-    yuiTable = this
-    @dataTable.doBeforeSortColumn = (oColumn, sSortDir) ->
+    @dataTable.doBeforeSortColumn = (oColumn, sSortDir) =>
       direction = if (sSortDir == YAHOO.widget.DataTable.CLASS_DESC) then "desc" else "asc"
-      window.location.href = yuiTable.getSortUrl(oColumn, direction)
+      window.location.href = @getSortUrl(oColumn, direction)
       return false
 
 

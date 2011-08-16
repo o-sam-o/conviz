@@ -10,8 +10,7 @@
 #
 class @YuiTable
   constructor: (@rawTable, @yuiTableDiv, @sortBy, @sortDirection) ->
-    table = this
-    $(document).ready -> table.setupTable()
+    $(document).ready => @setupTable()
 
   setupTable: ->
     tableDS = new YAHOO.util.DataSource(YAHOO.util.Dom.get(@rawTable))
