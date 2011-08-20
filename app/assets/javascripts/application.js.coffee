@@ -3,6 +3,8 @@
 #= require jquery
 #= require highcharts
 #= require protovis-r3.2
+#= require theme/modernizr.min
+#= require theme/tooltip.jquery
 
 #
 # To extend YuiTable you need to implement the following methods:
