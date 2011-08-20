@@ -5,14 +5,13 @@
   <title><%= content_for?(:title) ? (yield :title) : 'ConViz - Convict Record Visualisation' %></title>
 
   <%= stylesheet_link_tag    "application" %>
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/datatable/assets/skins/sam/datatable.css" /> 
+  <link href='http://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css'> 
+
   <%= javascript_include_tag "application" %>
 
-  <%= stylesheet_link_tag 'theme/style.css' %>
   <%= javascript_include_tag 'theme/modernizr.min.js' %>
   <%= javascript_include_tag 'theme/tooltip.jquery.js' %>
-
-  
-  <link href='http://fonts.googleapis.com/css?family=Neuton' rel='stylesheet' type='text/css'> 
 
   <script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script>
   <script src="http://yui.yahooapis.com/2.9.0/build/logger/logger-min.js"></script>

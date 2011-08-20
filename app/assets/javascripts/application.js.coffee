@@ -1,6 +1,8 @@
 # Place your application-specific JavaScript functions and classes here
 # This file is automatically included by javascript_include_tag :defaults
 #= require jquery
+#= require highcharts
+#= require protovis-r3.2
 
 #
 # To extend YuiTable you need to implement the following methods:
