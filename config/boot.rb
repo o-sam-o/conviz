@@ -4,3 +4,8 @@ require 'rubygems'
 ENV['BUNDLE_GEMFILE'] ||= File.expand_path('../../Gemfile', __FILE__)
 
 require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
+
+# Hack so rubber works : https://github.com/wr0ngway/rubber/issues/75
+require 'yaml'
+YAML::ENGINE.yamler= 'syck'
+
