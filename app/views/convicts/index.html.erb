@@ -8,6 +8,10 @@
   <script type="text/javascript" src="http://yui.yahooapis.com/2.9.0/build/datatable/datatable-min.js"></script>
 <% end %>
 
+<% content_for :title do %>
+  <%= convicts_page_title params %>
+<% end %>
+
 <% content_for :page_header do %>
   <h2 class="page-title">
     <%= convicts_page_title params %>
