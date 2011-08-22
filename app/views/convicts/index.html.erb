@@ -53,7 +53,7 @@
       <% @convicts.each do |convict| %>
         <tr>
           <td><%= convict.id %></td>
-          <td><%= link_to convict.name, convict_path(convict) %></td>
+          <td><%= link_to convict.name, "/convicts/#{convict.id}/#{convict.name.parameterize}" %></td>
           <td><%= convict.boat %></td>
           <td><%= convict.departure_date %></td>
           <td><%= convict.court %></td>

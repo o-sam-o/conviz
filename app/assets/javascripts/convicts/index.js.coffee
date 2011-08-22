@@ -36,7 +36,7 @@ class @ConvictsYuiTable extends @YuiTable
     ]
 
   getClickUrl: (record) ->
-    "/convicts/#{record.getData('id')}"
+    $(record.getData('name')).attr('href')
 
   getSortUrl: (column, direction) ->
     "/convicts?sort=#{column.getKey()}&direction=#{direction}#{@filteringParams}"
