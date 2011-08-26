@@ -2,7 +2,6 @@
 # This file is automatically included by javascript_include_tag :defaults
 #= require jquery
 #= require highcharts
-#= require protovis-r3.2
 #= require theme/modernizr.min
 #= require theme/tooltip.jquery
 
