@@ -87,5 +87,11 @@ Pending
 
 TODO
 
+ * Add blurb to each data page - e.g. Boats
+ * Create a page for every boat
+ * Create a page for every county
+ * Add maps to individual convict pages
+ * Add a graph indicating how early / late a convict was added
+
  * Download all records as CSV
  * Fix terms table sort
