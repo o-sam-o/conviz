@@ -87,12 +87,16 @@ Pending
 
 TODO
 
+ * Fix show convict map alignment in ie7
+ * Fix size of no SVG box
  * Fix lat and long of norfork island
  * Add blurb to each data page - e.g. Boats
  * Create a page for every boat
  * Create a page for every county
  * Add a graph indicating how early / late a convict was added
  * Add gauge of term to show convict page
+
+ * Add no flash message
 
  * Download all records as CSV
  * Fix terms table sort
