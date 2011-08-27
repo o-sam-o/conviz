@@ -50,6 +50,7 @@ Conviz and the site currently includes the following visualisations:
 *  Column chart of conviction decade and sentence severity
 *  Bar chart of most popular first names
 *  Bar chart of most popular last names
+*  Map of Conviction County and Destination on individual convict pages
 
 ## Code Quality
 The quality of code on this project is particularly low, there are no
@@ -81,17 +82,17 @@ Pending
  * Add an indicator about fleet number e.g. leaving 1787 is first fleet
  * Link boats to wikipedia
  * Provide links to famous convicts
- * Add map ect to convict page
  * Make the top boats graph a stacked bar graph showing how many
    convicts per each voyage
 
 TODO
 
+ * Fix lat and long of norfork island
  * Add blurb to each data page - e.g. Boats
  * Create a page for every boat
  * Create a page for every county
- * Add maps to individual convict pages
  * Add a graph indicating how early / late a convict was added
+ * Add gauge of term to show convict page
 
  * Download all records as CSV
  * Fix terms table sort

@@ -1,5 +1,8 @@
 class Convict < ActiveRecord::Base
 
+  has_one :county, :foreign_key => "name", :primary_key => 'court_county'
+  has_one :destination_details, :foreign_key => "name", :primary_key => 'destination', :class_name => 'Destination'
+
   def self.boat_stats
     query_to_map("select boat, count(*) as convicts, count(distinct(departure_date)) as voyage_count from convicts where boat is not null group by boat order by boat")
   end
