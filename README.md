@@ -87,9 +87,11 @@ Pending
 
 TODO
 
- * Fix show convict map alignment in ie7
- * Fix size of no SVG box
  * Fix lat and long of norfork island
+
+ * Add Irish Records : http://www.nationalarchives.ie/search/index.php?varmatchnames%5B0%5D=record_last_name&varmatchoperators%5B0%5D=isnotnull&varmatchvalues%5B0%5D=&scopeincludes%5B%5D=147&category=18&advanced=true&advancedSearchSbm=Submit#searchfocus
+
+ * On show convict page add how long ago they departed
  * Add blurb to each data page - e.g. Boats
  * Create a page for every boat
  * Create a page for every county
