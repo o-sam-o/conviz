@@ -87,11 +87,8 @@ Pending
 
 TODO
 
- * Fix lat and long of norfork island
-
  * Add Irish Records : http://www.nationalarchives.ie/search/index.php?varmatchnames%5B0%5D=record_last_name&varmatchoperators%5B0%5D=isnotnull&varmatchvalues%5B0%5D=&scopeincludes%5B%5D=147&category=18&advanced=true&advancedSearchSbm=Submit#searchfocus
 
- * On show convict page add how long ago they departed
  * Add blurb to each data page - e.g. Boats
  * Create a page for every boat
  * Create a page for every county
@@ -99,6 +96,7 @@ TODO
  * Add gauge of term to show convict page
 
  * Add no flash message
+ * See if Modernisr ect can be removed
 
  * Download all records as CSV
  * Fix terms table sort

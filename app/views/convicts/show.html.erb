@@ -34,7 +34,15 @@
       <strong>Alias:</strong> <%= @convict.alias_name %><br/>
     <% end %>  
     <strong>Boat:</strong> <%= @convict.boat.blank? ? 'Unknown' : link_to(@convict.boat, convicts_path(:boat =>  @convict.boat)) %><br/>
-    <strong>Departed:</strong> <%= @convict.departure_date.blank? ? 'Unknown' : link_to(@convict.departure_date.strftime("#{@convict.departure_date.day.ordinalize} %B %Y"), convicts_path(:departure_year =>  @convict.departure_year)) %><br/>
+    <strong>Departed:</strong> 
+    <% if @convict.departure_date.blank? %>
+       Unknown
+    <% else %>
+      <%= link_to(@convict.departure_date.strftime("#{@convict.departure_date.day.ordinalize} %B %Y"), convicts_path(:departure_year =>  @convict.departure_year)) %>
+      ~ <%= time_ago_in_words @convict.departure_date %> ago
+    <% end %><br/>
+
+
     <strong>Destination:</strong> <%= @convict.destination.blank? ? 'Unknown' : link_to(@convict.destination, convicts_path(:destination =>  @convict.destination)) %><%= ", #{@convict.destination_state}" unless @convict.destination_state.nil? %><br/>
     <strong>Court:</strong> <%= @convict.court %> <% unless @convict.court_county.blank? %> in <%= link_to @convict.court_county, convicts_path(:court_county =>  @convict.court_county) %> <% end %><br/>
     <strong>Sentence:</strong> <%= link_to(humanize_term(@convict.term), convicts_path(:term =>  @convict.term)) %>
