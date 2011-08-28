@@ -13,9 +13,14 @@
 <% end %>
 
 <% content_for :page_header do %>
-  <h2 class="page-title">Convict Boats</h2>
   <h1 class="page-title">Convict Boats</h1>
 <% end %>
+
+<div id="boats-page-container">
+
+    <p id="boats-overview" class="data-page-overview">
+    Did your <strong>ancestors</strong> voyage to Australia as convicts? This page contains details of many of the ships used to transport convicts to Australia and includes a count of convicts transported and voyages taken.  The page also includes a bar chart of boats that transported the most convicts and a bubble chart of the top 100 boats.
+    </p>
 
   <div class="graphs-container">
     <div id="top-boats-graph-container" class="widget">
@@ -88,7 +93,7 @@ $(document).ready(function() {
   </div>
 
 
-  <div id="boats-table-container" class="widget" style="clear: both;">
+  <div id="boats-table-container" class="widget">
     <h3 class="widget-section-title widget-title-table-icon">Browse By Boat</h3>
     <div id="data-table">Loading ...</div>
   </div>
@@ -114,3 +119,4 @@ $(document).ready(function() {
     </tbody>
   </table>
 
+</div>
