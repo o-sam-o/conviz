@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', '~> 3.1.0.rc6'
+gem 'rails', '~> 3.1.0'
 
-gem 'sass-rails', "~> 3.1.0.rc.6"
+gem 'sass-rails', "~> 3.1.0"
 gem 'coffee-script'
 gem 'uglifier'
 
@@ -16,6 +16,8 @@ gem 'will_paginate', '~> 3.0'
 
 group :development do
   gem 'sqlite3'
+  # Needed for scraping Irish convicts
+  gem 'nokogiri'
 end
 
 group :production do

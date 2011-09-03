@@ -15,3 +15,4 @@ public/data/names.html
 .sass-cache/*
 config/rubber/instance-production.yml
 config/rubber/rubber-secret.yml
+public/assets/*
