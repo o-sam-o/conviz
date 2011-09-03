@@ -8,7 +8,6 @@ lib/Convict_records.txt
 db/convicts_bk.db
 .rvmrc.05.09.2011-20:09:38
 .rvmrc.05.09.2011-20:09:39
-config/database.yml
 public/index.html
 public/home/about.html
 public/data/names.html
