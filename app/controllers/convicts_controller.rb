@@ -3,7 +3,12 @@ class ConvictsController < ApplicationController
   def index
     @convicts = Convict.order("#{params[:sort].present? ? params[:sort] : 'name'} #{params[:direction].present? ? params[:direction] : 'ASC'}")
     unless params[:q].blank?
-      @convicts = @convicts.where('lower(name) like ?', "%#{params[:q].downcase.strip}%") 
+      # If user enters two terms e.g. John Smith, we assume they mean
+      # name like John and Smith
+      search_terms = params[:q].downcase.strip.split
+      query_string = search_terms.collect { |st| '(lower(name) like ?)' }.join(' and ')
+      query_params = search_terms.collect { |st| "%#{st.downcase}%" }
+      @convicts = @convicts.where(query_string, *query_params) 
     end
 
     unless params[:boat].blank?
