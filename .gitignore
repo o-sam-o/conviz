@@ -16,3 +16,4 @@ public/data/names.html
 config/rubber/instance-production.yml
 config/rubber/rubber-secret.yml
 public/assets/*
+irish_convicts.csv

@@ -38,5 +38,6 @@ module Convicts
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.manifest = false
   end
 end
