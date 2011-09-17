@@ -22,7 +22,7 @@ rvm_ruby: 1.9.2
 rubygems_version: 1.5.2
 
 # REQUIRED: Set to version of rake you want RVM to install.
-rake_version: 0.8.7
+rake_version: 0.9.2
 
 # When rvm is installed as root, and you set the default, it symlinks ruby executables
 # into /usr/local/rvm

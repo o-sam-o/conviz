@@ -70,7 +70,7 @@ cloud_providers:
     # Ubuntu 10.04 Lucid	base install	64-bit	ami-fa01f193
     #
     # m1.small or m1.large or m1.xlarge
-    image_type: t1.micro
+    image_type: m1.small
     image_id: ami-44f18916
 
     # OPTIONAL: EC2 spot instance request support.
@@ -128,7 +128,7 @@ prompt_for_security_group_sync: true
 # OPTIONAL: The packages to install on all instances
 # You can install a specific version of a package by using a sub-array of pkg, version
 # For example, packages: [[rake, 0.7.1], irb]
-packages: [postfix, build-essential, git-core, ec2-ami-tools]
+packages: [postfix, build-essential, git-core, ec2-ami-tools, libxml2, libxml2-dev, libxslt1-dev]
 
 # OPTIONAL: gem sources to setup for rubygems
 # gemsources: ["http://rubygems.org", "http://gems.github.com"]
