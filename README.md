@@ -99,3 +99,6 @@ TODO
 
  * Download all records as CSV
  * Fix terms table sort
+
+Database Restore:
+pg_restore -v -c -O -d conviz_production conviz.db.bk 

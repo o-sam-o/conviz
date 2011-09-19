@@ -60,6 +60,7 @@ task :precompile_assets, :roles => :web, :except => { :no_release => true } do
   run "cd #{current_path}; rm -rf public/assets/*"
   run "cd #{current_path}; chmod -R 777 public"
   run "cd #{current_path}; RAILS_ENV=#{RUBBER_ENV} bundle exec rake assets:precompile"
+  run "cd #{current_path}; chmod -R 777 tmp"
   run "cd #{current_path}; RAILS_ENV=#{RUBBER_ENV} rake seed_cache"
 end
 
