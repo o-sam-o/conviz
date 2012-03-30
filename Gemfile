@@ -10,7 +10,7 @@ gem 'jquery-rails'
 
 gem "geokit", "~> 1.5.0"
 
-gem "rubber", "~> 1.14.1"
+gem "rubber", "~> 1.15.0"
 
 gem 'will_paginate', '~> 3.0'
 
