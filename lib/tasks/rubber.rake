@@ -10,6 +10,6 @@ if __FILE__ !~ /rubber\/generators\/vulcanize/
 
   Rubber::initialize(root, env)
 
-  require 'rubber/tasks/rubber'
+#  require 'rubber/tasks/rubber'
 
 end

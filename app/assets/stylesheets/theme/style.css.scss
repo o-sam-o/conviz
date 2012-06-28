@@ -32,7 +32,7 @@ Be inspired, but please don't steal :)
 **********************************************************************************************/
 
 #main {
-background: image_url('theme/images/main-bg.png') top left no-repeat;
+background: image_url('/assets/theme/images/main-bg.png') top left no-repeat;
 border-bottom: 1px solid #EEEEEE;
 padding: 15px 0 15px 0;
 }
@@ -69,7 +69,7 @@ float: left;
 **********************************************************************************************/
 
 #header {
-background: #211F1D image_url('theme/images/header-bg.png') top left repeat-x;
+background: #211F1D image_url('/assets/theme/images/header-bg.png') top left repeat-x;
 height: 150px;
 }
 
@@ -121,7 +121,7 @@ color: #CCCCCC;
 }
 
 #rotator img {
-background: image_url('theme/images/rotator-bg.png') top repeat;
+background: image_url('/assets/theme/images/rotator-bg.png') top repeat;
 float: right;
 padding: 15px;
 }
@@ -139,7 +139,7 @@ padding: 2px 0 2px 23px;
 }
 
 .widget_text {
-background: image_url('theme/images/texthatch.png') top left repeat;
+background: image_url('/assets/theme/images/texthatch.png') top left repeat;
 width: 930px;
 float: left;
 padding: 15px;
@@ -204,7 +204,7 @@ box-shadow: 0px 0px 2px #000000;
 **********************************************************************************************/
 
 h1.page-title, h2.page-title {
-background: image_url('theme/images/texthatch.png') top left repeat;
+background: image_url('/assets/theme/images/texthatch.png') top left repeat;
 font-family: 'Neuton', arial, serif;
 font-size: 25px;
 width: 930px;
@@ -276,7 +276,7 @@ text-align: right;
 }
 
 a.twitter-link {
-background: image_url('theme/images/twitter.png') 0 0 no-repeat;
+background: image_url('/assets/theme/images/twitter.png') 0 0 no-repeat;
 padding: 0 0 0 24px;
 }
 
